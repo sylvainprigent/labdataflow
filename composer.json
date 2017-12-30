@@ -1,0 +1,21 @@
+{
+    "name": "mumux/framework",
+    "description": "a php jquery framework",
+    "require": {
+        "firebase/php-jwt": "^5.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sylvain Prigent",
+            "email": "meriadec.prigent@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Mumux\\": "Framework/",
+            "Modules\\": "Modules/"
+        }
+    },
+    "minimum-stability": "alpha"
+}

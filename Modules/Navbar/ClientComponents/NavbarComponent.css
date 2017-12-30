@@ -1,0 +1,67 @@
+body{
+    margin-top: 70px;
+    background-color: #e7ecf0;
+}
+
+.lf-side-nav{
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    right: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    list-style: none;
+    color: #bbbbbb;
+    background-color: #292b2c;
+}
+
+.lf-tool-link{
+    color: #9a9da0;
+    /*margin-top:-2px;*/
+    font-size: 14px;
+    height: 20px;
+    
+}
+
+.lf-tool-link, a:link {
+    color: #9a9da0;
+    margin-left: 14px;
+}
+
+.lf-tool-link, a:visited {
+    color: #9a9da0;
+}
+
+.lf-tool-link:hover{
+    background-color: #373b3f;
+   
+    /*padding-top: 0px;*/
+}
+
+.lf-tool-link, a:hover {
+    color: #ffffff;
+    
+}
+
+.lf-tool-link, a:active {
+    color: #ffffff;
+}
+
+.lf-tool-button{
+    padding-left: 20px;
+    padding-right: -20px;
+    margin-top: -10px;
+}
+
+.lf-tool-icon{
+    width: 25px;
+    margin-top: -7px;
+}
+
+.lf-tool-title{
+    color: #9a9da0;
+    padding-left: 7px;
+    font-size: 14px;
+}

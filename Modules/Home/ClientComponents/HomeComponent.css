@@ -1,0 +1,35 @@
+.ldf-home-container{
+   padding-left: 50px;
+   padding-right: 50px;
+}
+
+.ldf-home-navbar{
+    background-color: #ffffff;
+    padding-top: 14px;
+    padding-right: 7px;
+    min-height: 400px;
+}
+
+.ldf-home-nav-link{
+    color: #333333;
+    margin-left: 7px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.ldf-home-nav-link i{
+    padding-top: 3px;
+}
+
+.ldf-home-nav-link:hover{
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.ldf-tool-title{
+    color: #9a9da0;
+    padding-left: 7px;
+    font-size: 14px;
+}
