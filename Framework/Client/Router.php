@@ -15,25 +15,8 @@ class router
     public function RouterRequest()
     {
         $request = new \Mumux\Server\Request($_SERVER['REQUEST_METHOD'], array_merge($_GET, $_POST));
-
         $urlInfo = $this->getUrlData($request);
-
-        /*
-        if ( $urlInfo["path"] != Configuration::get("loginpath") ){
-
-            if (!$this->hasValidToken($request)) {
-                \header_remove();
-                \header("Location:" . Configuration::get("rooturl") . "/" . Configuration::get("loginpath"));
-            }
-        }
-        */
-
         $this->renderModule($urlInfo["module"], $urlInfo["component"], $urlInfo["layout"]);
-    }
-
-    private function hasValidToken($request)
-    {
-        return \Modules\Auth\ServerRoutes\AuthRoutes::checkToken($request);
     }
 
     /**
