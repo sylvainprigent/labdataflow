@@ -1,6 +1,9 @@
 <?php
 namespace Mumux\Client;
 
+use Mumux\Configuration;
+
+
 /**
  * Class that rout the input requests
  * 
@@ -15,7 +18,22 @@ class router
 
         $urlInfo = $this->getUrlData($request);
 
+        /*
+        if ( $urlInfo["path"] != Configuration::get("loginpath") ){
+
+            if (!$this->hasValidToken($request)) {
+                \header_remove();
+                \header("Location:" . Configuration::get("rooturl") . "/" . Configuration::get("loginpath"));
+            }
+        }
+        */
+
         $this->renderModule($urlInfo["module"], $urlInfo["component"], $urlInfo["layout"]);
+    }
+
+    private function hasValidToken($request)
+    {
+        return \Modules\Auth\ServerRoutes\AuthRoutes::checkToken($request);
     }
 
     /**
@@ -81,7 +99,7 @@ class router
         $jsFile = $moduleComponentsDir . $componentName . "Component.js";
         if (\file_exists($jsFile)) {
             $head .= "<script src=\"" . $jsFile . "\"></script>";
-            
+
         }
 
         return $head;
@@ -136,81 +154,6 @@ class router
         return $content;
     }
 
-
-
-
-
-/*
-    private function renderModuleOld($moduleName, $componentName, $layoutUrl)
-    {
-
-        // get the layout
-        if ($layoutUrl == "") {
-            $html = "<!DOCTYPE html><html><head><module-scripts></module-scripts></head><body><module></module></body></html>";
-        } else {
-            $html = \file_get_contents($layoutUrl);
-        }
-        $head = "";
-
-        // replace each module directly in the layout
-        $modules = \scandir("Modules");
-
-        foreach ($modules as $module) {
-            $m = strtolower($module);
-            $tag = "<" . $m . "></" . $m . ">";
-            if (strstr($html, $tag)) {
-                $moduleContent = $this->getModuleContent($module, $module);
-                $head .= $this->getModuleHeader($module);
-                $html = \str_replace($tag, $moduleContent, $html);
-            }
-        }
-        
-        // replace the data in the main layout
-        $moduleContent = $this->getModuleContent($moduleName, $componentName);
-        $head .= $this->getModuleHeader($moduleName);
-
-        $html = \str_replace("<module-scripts></module-scripts>", $head, $html);
-        echo \str_replace("<module></module>", $moduleContent, $html);
-    }
-
-    protected function getModuleContent($moduleName, $routeName)
-    {
-        $moduleComponentsDir = "Modules/" . $moduleName . "/ClientComponents/";
-
-        // get the module root HTML
-        $moduleContent = \file_get_contents($moduleComponentsDir . $routeName . ".html");
-
-        // replace the components in the module html
-        $files = \scandir($moduleComponentsDir);
-        foreach ($files as $file) {
-
-            if ($this->endsWith($file, "Component.html")) {
-                $componentContent = \file_get_contents($moduleComponentsDir . $file);
-                $componentName = \strtolower(\str_replace("Component.html", "", $file));
-                $moduleContent = \str_replace("<" . $componentName . "></" . $componentName . ">", $componentContent, $moduleContent);
-            }
-        }
-
-        return $moduleContent;
-    }
-
-    protected function getModuleHeader($moduleName)
-    {
-        $moduleComponentsDir = "Modules/" . $moduleName . "/ClientComponents/";
-
-        $files = \scandir($moduleComponentsDir);
-        $head = "";
-        foreach ($files as $file) {
-            if ($this->endsWith($file, "js")) {
-                $head .= "<script src=\"" . $moduleComponentsDir . $file . "\"></script>";
-            } else if ($this->endsWith($file, "css")) {
-                $head .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . $moduleComponentsDir . $file . "\">";
-            }
-        }
-
-        return $head;
-    }
-     */
     protected function endsWith($haystack, $needle)
     {
         $length = strlen($needle);

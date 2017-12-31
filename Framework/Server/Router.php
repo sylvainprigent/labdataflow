@@ -64,6 +64,7 @@ class router
      */
     private function createController($urlInfo, Request $request)
     {
+        //print_r($urlInfo);
         return $this->createControllerImp($urlInfo["pathInfo"]["module"], $urlInfo["pathInfo"]["route"], $request);
     }
 
