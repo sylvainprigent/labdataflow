@@ -30,7 +30,7 @@ class Cache
                 foreach ($modulesNames as $moduleName) {
         
                     // get the routing class
-                        $routingFile = "Modules/" . $moduleName . "/" . ucfirst($moduleName) . "ClientRouting.php";
+                        $routingFile = "Modules/" . $moduleName . "/ClientRoutes.json";
                         if (file_exists($routingFile)) {
                                 $this->addRoutsToDatabase($moduleName, $routingFile);
                         } else {
@@ -47,39 +47,33 @@ class Cache
         protected function addRoutsToDatabase($moduleName, $routingFile)
         {
 
-                //require($routingFile);
-                $className = "\\Modules\\" . ucfirst($moduleName) . "\\" . ucfirst($moduleName) . "ClientRouting";
+                $routes = \json_decode(\file_get_contents($routingFile));
+                foreach($routes as $route){
 
-                $routingClass = new $className();
-                $routingClass->listRouts();
-                for ($r = 0; $r < $routingClass->count(); $r++) {
-                        $identifier = $routingClass->getIdentifier($r);
-                        $path = $routingClass->getPath($r);
-                        $component = $routingClass->getComponent($r);
-                        $layout = $routingClass->getLayout($r);
-                        $restricted = $routingClass->getRestricted($r);
+                        $routeArray = json_decode(json_encode($route), true);
 
-                        $this->setCacheUrl($identifier, $path, $component, $layout, $restricted, $moduleName);
+                        $identifier = $routeArray["identifier"];
+                        $path = $routeArray["path"];
+                        $component = $routeArray["component"];
+                        $layout = $routeArray["layout"];
+
+                        $this->setCacheUrl($identifier, $path, $component, $layout, $moduleName);
                 }
         }
 
-        protected function setCacheUrl($identifier, $path, $component, $layout, $restricted, $moduleName)
+        protected function setCacheUrl($identifier, $path, $component, $layout, $moduleName)
         {
-                $r = 0;
-                if ($restricted) {
-                        $r = 1;
-                }
                 $id = $this->getChacheUrlID($identifier);
                 //echo 'id = ' . $id . "<br/>";
                 if ($id > 0) {
                     //echo "update cache_urls begin <br/>";
-                        $sql = "UPDATE cache_client_urls SET identifier=?, path=?, component=?, layout=?, restricted=?, module=? WHERE id=?";
-                        $this->runRequest($sql, array($identifier, $path, $component, $layout, $r, $moduleName, $id));
+                        $sql = "UPDATE cache_client_urls SET identifier=?, path=?, component=?, layout=?, module=? WHERE id=?";
+                        $this->runRequest($sql, array($identifier, $path, $component, $layout, $moduleName, $id));
                     //echo "update cache_urls end <br/>";
                 } else {
                     //echo "insert cache_urls begin <br/>";
-                        $sql = "INSERT INTO cache_client_urls (identifier, path, component, layout, restricted, module) VALUES(?,?,?,?,?,?) ";
-                        $this->runRequest($sql, array($identifier, $path, $component, $layout, $r, $moduleName));
+                        $sql = "INSERT INTO cache_client_urls (identifier, path, component, layout, module) VALUES(?,?,?,?,?) ";
+                        $this->runRequest($sql, array($identifier, $path, $component, $layout, $moduleName));
                         $id = $this->getDatabase()->lastInsertId();
                     //echo "insert cache_urls end <br/>";
                 }
@@ -128,7 +122,6 @@ class Cache
                         `path` varchar(255) NOT NULL DEFAULT '',
                         `component` varchar(255) NOT NULL DEFAULT '',
                         `layout` varchar(255) NOT NULL DEFAULT '',
-                        `restricted` int(1) NOT NULL DEFAULT 0,
                         `module` varchar(255) NOT NULL DEFAULT '',
                 PRIMARY KEY (`id`)
                 );";

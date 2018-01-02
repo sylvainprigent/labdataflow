@@ -30,7 +30,7 @@ class Cache
                 foreach ($modulesNames as $moduleName) {
         
                     // get the routing class
-                        $routingFile = "Modules/" . $moduleName . "/" . ucfirst($moduleName) . "ServerRouting.php";
+                        $routingFile = "Modules/" . $moduleName . "/ServerRoutes.json";
                         if (file_exists($routingFile)) {
                                 $this->addRoutsToDatabase($moduleName, $routingFile);
                         } else {
@@ -46,27 +46,28 @@ class Cache
          */
         protected function addRoutsToDatabase($moduleName, $routingFile)
         {
+                $routes = json_decode(\file_get_contents($routingFile));
+                foreach ($routes as $rout) {
 
-                //require($routingFile);
-                $className = "\\Modules\\" . ucfirst($moduleName) . "\\" . ucfirst($moduleName) . "ServerRouting";
+                        $routeArray = json_decode(json_encode($rout), true);
 
-                $routingClass = new $className();
-                $routingClass->listRouts();
-                for ($r = 0; $r < $routingClass->count(); $r++) {
-                        $identifier = $routingClass->getIdentifier($r);
-                        $requestType = $routingClass->getRequestType($r);
-                        $path = $routingClass->getPath($r);
-                        $route = $routingClass->getRoute($r);
-                        $actions = $routingClass->getAction($r);
-                        $gets = $routingClass->getGet($r);
-                        $getsRegexp = $routingClass->getGetRegexp($r);
+                        $identifier = $routeArray["identifier"];
+                        $requestType = $routeArray["request"];
+                        $path = $routeArray["path"];
+                        $route = $routeArray["route"];
+                        $action = $routeArray["action"];
 
-                        $this->setCacheUrl($identifier, $requestType, $path, $moduleName, $route, $actions, $gets, $getsRegexp);
+                        if (isset($routeArray["gets"])) {
+                                $gets = $routeArray["gets"];
+                        } else {
+                                $gets = array();
+                        }
 
+                        $this->setCacheUrl($identifier, $requestType, $path, $moduleName, $route, $action, $gets);
                 }
         }
 
-        protected function setCacheUrl($identifier, $requestType, $path, $module, $route, $actions, $gets, $getsRegexp)
+        protected function setCacheUrl($identifier, $requestType, $path, $module, $route, $actions, $gets)
         {
         
                 // insert the urls
@@ -74,7 +75,7 @@ class Cache
         
                 // instert the gets
                 for ($g = 0; $g < count($gets); $g++) {
-                        $this->setCacheUrlGetDB($id, $gets[$g], $getsRegexp[$g]);
+                        $this->setCacheUrlGetDB($id, $gets[$g]["name"], $gets[$g]["regexp"]);
                 }
         }
 

@@ -43,7 +43,13 @@ class router
     {
         $content = $this->getLayoutContent($layoutUrl);
         $content = $this->insertModuleContent($moduleName, $componentName, $content);
-        echo $this->replaceComponentsContent($content);
+        $content = $this->replaceComponentsContent($content);
+
+        if ( \Mumux\Configuration::get("usei18n") ){
+            $tranlsator = new I18n();
+            $content = $tranlsator->translate($content);
+        }
+        echo $content;
     }
 
     private function insertModuleContent($moduleName, $componentName, $content)
