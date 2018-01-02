@@ -13,7 +13,7 @@ $( document ).ready(function() {
             }, 
             function(response){
                 if ( response[0].status == 'success' ){
-                    alert("token = " + response[0].jwt);
+                    //alert("token = " + response[0].jwt);
                     window.sessionStorage.accessToken = response[0].jwt;
                     window.location.replace(mumuxconfig.clienturl + mumuxconfig.homepage);
                 }

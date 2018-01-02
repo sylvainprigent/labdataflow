@@ -35,6 +35,10 @@ class I18n
         }
     }
 
+    public function getLang(){
+        return $this->lang;
+    }
+
     public function translate($page)
     {
 
@@ -65,8 +69,8 @@ class I18n
             while (!$found) {
 
                 $char = substr($page, $pos + 5 + $offset, 1);
-                if ($char == '"' || $char == ' ' || $char == ">" || $char == "<" || $char == "'") {
-                    $found = true;
+                if ($char == '"' || $char == ' ' || $char == ">" || $char == "<" || $char == "'" || $offset > 255 ) {
+                    $found = true;  
                 }
                 $offset++;
             }
