@@ -1,0 +1,8 @@
+[
+    {
+        "identifier": "ldf_home",
+        "path": "home",
+        "component": "home",
+        "layout": "layout.html"
+    }
+]

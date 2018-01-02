@@ -1,0 +1,9 @@
+[
+    {
+        "identifier": "mumux_auth_login",
+        "request": "POST",
+        "path": "login",
+        "route": "LoginRoutes",
+        "action": "login"
+    }
+]

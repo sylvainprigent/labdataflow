@@ -1,0 +1,8 @@
+[
+    {
+        "identifier": "lf_member",
+        "path": "member",
+        "component": "member",
+        "layout": "layout.html"
+    }
+]

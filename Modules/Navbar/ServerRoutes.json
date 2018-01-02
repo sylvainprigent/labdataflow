@@ -1,0 +1,9 @@
+[
+    {
+        "identifier": "ldf_navbar_get",
+        "request": "GET",
+        "path": "navbar",
+        "route": "NavbarRoutes",
+        "action": "get"
+    }
+]

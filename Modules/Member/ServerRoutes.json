@@ -1,0 +1,76 @@
+[
+    {
+        "identifier": "lf_users_get",
+        "request": "GET",
+        "path": "members",
+        "route": "MemberRoutes",
+        "action": "get"
+    },
+    {
+        "identifier": "ldf_users_post",
+        "request": "POST",
+        "path": "members",
+        "route": "MemberRoutes",
+        "action": "post"
+    },
+    {
+        "identifier": "lf_users_delete",
+        "request": "DELETE",
+        "path": "members",
+        "route": "MemberRoutes",
+        "action": "delete"
+    },
+    {
+        "identifier": "ldf_users_getone",
+        "request": "GET",
+        "path": "members",
+        "route": "MemberRoutes",
+        "action": "getone",
+        "gets": [
+            {
+                "name": "id",
+                "regexp": "d+" 
+            }
+        ]
+    },
+    {
+        "identifier": "ldf_users_postone",
+        "request": "POST",
+        "path": "members",
+        "route": "MemberRoutes",
+        "action": "postone",
+        "gets": [
+            {
+                "name": "id",
+                "regexp": "d+" 
+            }
+        ]
+    },
+    {
+        "identifier": "ldf_users_putone",
+        "request": "PUT",
+        "path": "members",
+        "route": "MemberRoutes",
+        "action": "putone",
+        "gets": [
+            {
+                "name": "id",
+                "regexp": "d+" 
+            }
+        ]
+    },
+    {
+        "identifier": "ldf_users_deleteone",
+        "request": "DELETE",
+        "path": "members",
+        "route": "MemberRoutes",
+        "action": "deleteone",
+        "gets": [
+            {
+                "name": "id",
+                "regexp": "d+" 
+            }
+        ]
+    }
+]
+          

@@ -1,0 +1,14 @@
+[
+    {
+        "identifier": "mumux_login",
+        "path": "login",
+        "component": "login",
+        "layout": "Modules/Auth/ClientComponents/layout.html"
+    },
+    {
+        "identifier": "mumux_logout",
+        "path": "logout",
+        "component": "logout",
+        "layout": ""
+    }
+]
