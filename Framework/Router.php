@@ -8,13 +8,16 @@ class Router
     public function routerRequest()
     {
 
-
         $route = "";
         if (isset($_GET["path"])) {
             $route = $_GET["path"];
         }
         
-        //echo "route = " . $route . "<br/>";
+        if ( \in_array($route, \Mumux\Configuration::get("forbidenpaths", array())) ){
+            echo '{status: "error", message: "access denied"}';
+            return;
+        }
+
 
         $updateUrl = "update";
         if (strpos($route, $updateUrl) !== false) {

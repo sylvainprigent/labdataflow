@@ -5,5 +5,12 @@
         "path": "login",
         "route": "LoginRoutes",
         "action": "login"
+    },
+    {
+        "identifier": "mumux_auth_install",
+        "request": "GET",
+        "path": "install",
+        "route": "InstallRoutes",
+        "action": "install"
     }
 ]

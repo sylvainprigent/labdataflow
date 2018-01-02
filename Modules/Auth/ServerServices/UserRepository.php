@@ -13,4 +13,22 @@ class UserRepository extends \Mumux\Server\Repository
         }
         return null;
     }
+
+    public function createDefaultUser(){
+
+
+        $login = "admin";
+        $password = "admin";
+        $status_id = 2;
+        $date_created = date("Y-m-d", time()); 
+
+        $sql = "INSERT INTO auth_users (login, pwd, status_id, date_created) VALUES (?,?,?,?)";
+        $this->runRequest($sql, array(
+            $login,
+            md5($password),
+            $status_id,
+            $date_created
+        ));
+
+    }
 }

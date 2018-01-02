@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>LabDataFlow</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/0e73d6a7dc.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="row">
+        <div w3-include-html="navbar.html"></div>
+    </div>
+
+    <!-- TITLE -->
+    <div class="row lf-subbar">
+        <h4 class="mx-auto"> Install</h4>
+    </div>
+
+    <!-- MENU -->
+    <div class="row">
+        <div class="col-md-2 lf-side-nav">
+
+            <h5>
+                Install
+            </h5>
+            <ul>
+                <li class="lf-tool-link">
+                    <a id="nav_link" href="install.html#Prerequisites"> Prerequisites </a>
+                </li>
+                <li class="lf-tool-link">
+                    <a id="nav_link" href="install.html#copySources"> Copy of sources </a>
+                </li>
+                <li class="lf-tool-link">
+                    <a id="nav_link" href="install.html#configuration"> Configuration </a>
+                </li>
+                <li class="lf-tool-link">
+                    <a id="nav_link" href="install.html#initdatabase"> Initialization of the database </a>
+                </li>
+
+
+            </ul>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="col-md-10" style="margin-top:25px;">
+
+            <p>
+                This section describes step-by-step how to installation new instance of LabDataFlow on a server. The configuration of a server
+                is not specific to LabDataFLow, thus, it is not described in this tutorial.
+            </p>
+
+            <h2 id="Prerequisites">Prerequisites: server configuration</h2>
+            <p>
+                To run, LabDataFLow needs a web / php server and a mysql server
+            </p>
+            <ul>
+                <li> PHP version must be greater than or equal to version 5.6 </li>
+                <li> To install LabDataFLow, you must have access to the server file system (FTP or SSH for example) and an access
+                    to the MySQL database (MySQL server access and login, password for admin user) </li>
+                <li> It is necessary that the web server authorizes the use of .htaccess files ( for protection of the source
+                    files and URL rewrite)
+                </li>
+                <li>
+                    The php
+                    <i>RewriteEngine</i> module has to be installed and activated
+                </li>
+            </ul>
+
+            <h2 id="copySources">Copy of sources</h2>
+
+            <ul>
+                <li> Download the sources
+                    <a href="https://github.com/sylvainprigent/labdataflow/archive/master.zip">here</a>
+                </li>
+                <li> Unzip it </li>
+                <li> Delete the directory "docs" (it is needed only for the web documentation) </li>
+                <li> Rename the file
+                    <b>Config/conf.ini.sample</b> to
+                    <b>Config/conf.ini</b>
+                </li>
+            </ul>
+
+
+
+            <h2 id="configuration">Configuration</h2>
+
+            Edit
+            <b>Config/conf.ini</b> following the instructions below:
+
+
+            <div class="highlight">
+                <pre class="prettyprint"><code>
+
+                        <span class="c"> ; Configuration</span>
+
+                        <span class="c"> [Installation]</span>
+                        <span class="c"> servername = "localhost"</span>
+                        <span class="c"> rooturl = /labdataflow</span>
+                        <span class="c"> rootapi = api/v1/</span>
+                        
+                        
+                        <span class="c">[Framework]</span>
+                        <span class="c">usei18n = true</span>
+                        <span class="c">usecache = true</span>
+                        <span class="c">languages[] = "en"</span>
+                        <span class="c">languages[] = "fr"</span>
+                        <span class="c">forbidenpaths[] = "update"</span>
+                        
+                        <span class="c">[Database]</span>
+                        <span class="c">dsn = 'mysql:host=localhost;dbname=pm_mumux;charset=utf8'</span>
+                        <span class="c">login = root</span>
+                        <span class="c">pwd = root</span>
+
+                        <span class="c">[Authentication]</span>
+                        <span class="c">jwtkey = "qsneudpslqmaz56gs5s4aD&sf2jns03JSnsh"</span>
+                        <span class="c">authscript = Modules::Auth::ClientComponents::auth.js</span>
+                        <span class="c">loginpath = login</span>
+                        
+                        <span class="c">[Modules]</span>
+                        <span class="c">Modules[] = "Auth"</span>
+                        <span class="c">Modules[] = "Home"</span>
+                        <span class="c">Modules[] = "Member"</span>
+                        <span class="c">Modules[] = "Navbar"</span>
+
+                    </code></pre>
+            </div>
+
+            The settings in the configuration file above are the following:
+            <ul>
+                <li>
+                    <b>Installation:</b> Contains the informations about the LabDataFlow installation in the server.
+                    <ul>
+                        <li>
+                            <i>servername:</i> set the domain name of your server
+                        </li>
+                        <li>
+                            <i>rooturl:</i> set the folder where the LabDataFlow sources are installed. Set it to "/" if you
+                            installed or serve LabDataFlow at the root of your web server
+                        </li>
+                        <li>
+                            <i>rootapi:</i> set the url prefix of the API url. In RESTfull API this should be like "api/vx";
+                            Thus in the sample conf.ini file, the API will be accessible by the URL:
+                            <i>http://localhost/labdataflow/api/v1</i>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <b>Framework:</b> is the framework configuration
+                    <ul>
+                        <li>
+                            <i>usei18n:</i> should be set to true. Set it to false in developement mode if you don't want the
+                            client to apply translation in the client pages
+                        </li>
+                        <li>
+                            <i>usecache:</i> should be set to true. The framework generate cache (html, js, and css files) in
+                            the web directory to increase speed. Set it to false in developpement mode to be sure you use
+                            the last version of the code
+                        </li>
+                        <li>
+                            <i>languages:</i> list of the languages available in LabDataFlow
+                        </li>
+                        <li>
+                            <i>forbidenpaths:</i> is the list of the urls that are not allowed. We use it to disable urls needed only for installation and update
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li>
+                    <b>Database:</b> is the database configuration
+                    <ul>
+                        <li>
+                            <i>mysql:host</i>: set the address of your mysql server. Should be localhost in most of the cases</li>
+                        <li>
+                            <i>dbname</i>: set the name of the database where the LabDataFlow data will be stored. If you don't
+                            have yet a database, create it with your mysql client</li>
+                        <li>
+                            <i>login</i>: set the login of a mysql account with read and write authorisations</li>
+                        <li>
+                            <i>password</i>: set the password of a mysql account with read and write authorisations</li>
+                    </ul>
+
+                </li>
+                <li>
+                    <b>Authentication:</b> is configuration of the 'Auth' module in charge of filtering the access to protected
+                    pages
+                    <ul>
+                        <li>
+                            <i>jwtkey</i>: secret key to encrypte the user authentication token. Please change it to a long
+                            and random key
+                        </li>
+                        <li>
+                            <i>authscript</i>: reference to the javascript in charge of user authentication. If you implement
+                            your own authentication module, please set here the reference of your authentication script
+                        </li>
+                        <li>
+                            <i>loginpath</i>: path of the login page. This is the page where the user will be redirected to
+                            if he hase not authentication. Change this if you emplemented your own login page
+                        </li>
+                    </ul>
+
+                </li>
+                <li>
+                    <b>Modules:</b> List of available modules. Nothing to change here
+                </li>
+            </ul>
+
+            <h2 id="initdatabase">Initialization of the database</h2>
+
+            Open a web browser and enter the url: <b>http://localhost/labdataflow/api/v1/install</b> replacing <i>localhost</i> with your server name (the one you put in servername setting), <i>api/v1/</i> with the api path you set in <i>rootapi</i>, and <i>rooturl</i>
+            by the setting you set in rooturl.
+            This command run a script (from the Auth module) that create the cache tables in the database and the default user account. If everything goes correctly, you should get the message:
+            <i>{ status: "success", message: "The database has been initialised"}</i>
+            <br/>
+            To prevent hackers using the install URL, we need to forbid the install path. Open the config/conf.ini file and add the line <i>forbidenpaths[] = "api/v1/install"</i> in the server section 
+
+        </div>
+
+       
+    </div>
+
+    <script>
+        w3.includeHTML();
+    </script>
+
+</body>
+
+</html>

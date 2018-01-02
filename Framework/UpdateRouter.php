@@ -4,7 +4,7 @@ namespace Mumux;
 class UpdateRouter
 {
 
-    public function routerRequest()
+    public function routerRequest($verbose = true)
     {
         try {
             // update cache
@@ -18,7 +18,9 @@ class UpdateRouter
             // update database
             $this->updateDatabase();
 
-            echo \json_encode(array("status" => "success", "Messsage" => "cache and database have been updated"));
+            if ($verbose){
+                echo \json_encode(array("status" => "success", "Messsage" => "cache and database have been updated"));
+            }
         } catch (Exception $ex) {
             echo json_encode(array(
                 'error' => array(
