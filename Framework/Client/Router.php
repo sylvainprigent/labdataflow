@@ -55,10 +55,10 @@ class router
     {
 
         // get cache dir 
-        $cacheDir = "web/" . \ucfirst($moduleName);
+        $cacheDir = "web/cache/" . \ucfirst($moduleName);
         if (Configuration::get("usei18n")) {
             $translator = new \Mumux\Client\I18n();
-            $cacheDir = "web/" . \ucfirst($moduleName) . "/" . $translator->getLang();
+            $cacheDir = "web/cache/" . \ucfirst($moduleName) . "/" . $translator->getLang();
         }
 
         $htmlFile = $cacheDir . "/" . $moduleName . ".html";

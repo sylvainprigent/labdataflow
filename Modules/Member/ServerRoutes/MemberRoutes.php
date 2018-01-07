@@ -33,20 +33,25 @@ class MemberRoutes extends \Modules\Auth\ServerRoutes\AuthRoutes{
     // create one
     public function post(){
 
-        $pwd = $this->request->getParameter("password");
-        $pwdconfirm = $this->request->getParameter("passwordconfirm");
-        
-        if ( $pwd != $pwdconfirm ){
-            $this->render(array( "status" => "error", "code" => 1, "message" => "The two passwords are differents" ));
-            return;
-        }
-        if ( $this->getRepository('Member::MemberRepository')->exists($this->request->getParameter("login")) ){
-            $this->render(array( "status" => "error", "code" => 2, "message" => "The login is already in use" ));
-            return;
-        }
+        if ($user['status_id'] > 1){
+            $pwd = $this->request->getParameter("password");
+            $pwdconfirm = $this->request->getParameter("passwordconfirm");
+            
+            if ( $pwd != $pwdconfirm ){
+                $this->render(array( "status" => "error", "code" => 1, "message" => "The two passwords are differents" ));
+                return;
+            }
+            if ( $this->getRepository('Member::MemberRepository')->exists($this->request->getParameter("login")) ){
+                $this->render(array( "status" => "error", "code" => 2, "message" => "The login is already in use" ));
+                return;
+            }
 
-        $userArray = $this->getRepository('Member::MemberRepository')->add($this->request->getParameters());
-        $this->render(array( "status" => "success", "message" => "User has been created" ));
+            $userArray = $this->getRepository('Member::MemberRepository')->add($this->request->getParameters());
+            $this->render(array( "status" => "success", "message" => "User has been created" ));
+        }
+        else{
+            $this->render(array( "error" => "success", "message" => "permission denied" ), 403);
+        }
         
     }
 
@@ -59,14 +64,19 @@ class MemberRoutes extends \Modules\Auth\ServerRoutes\AuthRoutes{
 
     // not allowed
     public function postone($id){
-        // return error 405
+        $this->render(array( "status" => "error", "message" => "Method Not Allowed" ), 405);
     }
 
     // update one
     public function putone($id){
-        
-        $this->getRepository('Member::MemberRepository')->put($id, $this->getPutData());
-        $this->render(array( "status" => "success", "message" => "User has been modified" ));
+
+        if ($user['status_id'] > 1){
+            $this->getRepository('Member::MemberRepository')->put($id, $this->getPutData());
+            $this->render(array( "status" => "success", "message" => "User has been modified" ));
+        }
+        else{
+            $this->render(array( "status" => "error", "message" => "permission denied" ), 403);
+        }
     }
 
     // delete one

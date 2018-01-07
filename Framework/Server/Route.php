@@ -41,8 +41,16 @@ abstract class Route
         }
     }
 
-    public function render(Array $data)
+    public function render(Array $data, $code = 200)
     {
+
+        if ($code == 403 ){
+            header('HTTP/1.0 403 Forbidden');
+        }
+        else if ($code == 405){
+            header("HTTP/1.0 405 Method Not Allowed"); 
+        }
+
         header('Content-Type: application/json');
         echo \json_encode($data);
     }
