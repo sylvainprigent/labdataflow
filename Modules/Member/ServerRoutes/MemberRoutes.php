@@ -33,7 +33,7 @@ class MemberRoutes extends \Modules\Auth\ServerRoutes\AuthRoutes{
     // create one
     public function post(){
 
-        if ($user['status_id'] > 1){
+        if ($this->user['status_id'] > 1){
             $pwd = $this->request->getParameter("password");
             $pwdconfirm = $this->request->getParameter("passwordconfirm");
             
@@ -70,7 +70,7 @@ class MemberRoutes extends \Modules\Auth\ServerRoutes\AuthRoutes{
     // update one
     public function putone($id){
 
-        if ($user['status_id'] > 1){
+        if ($this->user['status_id'] > 1){
             $this->getRepository('Member::MemberRepository')->put($id, $this->getPutData());
             $this->render(array( "status" => "success", "message" => "User has been modified" ));
         }
