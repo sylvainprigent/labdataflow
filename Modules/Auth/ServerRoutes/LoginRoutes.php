@@ -22,9 +22,12 @@ class LoginRoutes extends Route
         );
 
         if ($loggedIn) {
+
+            $user = $this->getRepository("Auth::UserRepository")->getByLogin($this->request->getParameter("login"));
+
             // create a token
             $jwt = AuthRoutes::createTocken($loggedIn);
-            $data = array(["status" => "success", "jwt" => $jwt]);
+            $data = array(["status" => "success", "jwt" => $jwt, "user" => $user]);
         } else {
             $data = array(["status" => "error", "message" => "Cannot find user with given credentials"]);
         }

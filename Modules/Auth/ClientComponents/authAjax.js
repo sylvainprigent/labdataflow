@@ -6,14 +6,19 @@
         var param = {
             url: null,
             type: "GET",
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             data: "",
-            success: null
+            success: null,
+            error: function (exception) {
+                alert('Exception:' + JSON.stringify(exception));
+            }
         };
         param = $.extend(param, argument); // on fusionne l'argument et l'objet
 
         $.ajax({
             url: param.url,
             type: param.type,
+            contentType: param.contentType,
             data: param.data,
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("Authorization", "Bearer " + window.sessionStorage.accessToken);
@@ -29,13 +34,17 @@
                     return;
                 }
 
+                //alert(JSON.stringify(result));
+
                 if (param.success) {
-                    param.success(result);
+                    param.success(result.data);
                 }
 
             },
             error: function (exception) {
-                alert('Exception:' + JSON.stringify(exception));
+                if (param.error) {
+                    param.error(exception);
+                }
             }
         });
     };

@@ -25,10 +25,14 @@ class router
 
             $urlInfo = $this->getUrlData($request);
 
+            //print_r($urlInfo);
+
             $controller = $this->createController($urlInfo, $request);
 
             $action = $urlInfo["pathInfo"]["action"];
             $args = $this->getArgs($urlInfo);
+
+            // parse arfs
 
             $this->runAction($controller, $urlInfo, $action, $args);
 
@@ -52,7 +56,9 @@ class router
         $path = str_replace(\Mumux\Configuration::get("rootapi"), "", $path);
  
         $pathData = explode("/", $path);
-        $pathInfo = $this->modelCache->getURLInfos($request->getType(), $pathData[0], count($pathData) - 1);
+        //echo 'path 0 = ' . $pathData[0] . "<br/>";
+        //echo 'request type = ' . $request->getType() . "<br/>";
+        $pathInfo = $this->modelCache->getURLInfos($request->getType(), $pathData[0]);
         return array("pathData" => $pathData, "pathInfo" => $pathInfo);
     }
 
@@ -98,16 +104,39 @@ class router
     {
 
         $args = $urlInfo["pathInfo"]["gets"];
+        $argsvals = $urlInfo["pathData"];
         $argsValues = array();
 
-        for ($i = 0; $i < count($args); $i++) {
-            if (isset($urlInfo["pathData"][$i + 1])) {
-                $argsValues[$args[$i]["name"]] = $urlInfo["pathData"][$i + 1];
-            } else {
-                $argsValues[$args[$i]["name"]] = "";
-            }
+        if (count($args) == 0){
+            return $argsValues;
         }
 
+        //echo "argval:" . $argsvals[1] . "<br/>";
+
+        for ($i = 0; $i < count($args); $i++) {
+
+            if ( $args[$i]["name"] == ":id" ){
+                if ( intval($argsvals[1]) > 0 ){
+                    $argsValues["id"] = intval($argsvals[1]);
+                }
+                else{
+                    $argsValues["id"] = 0;
+                }
+            } 
+            else{
+
+                $key = array_search($args[$i]["name"], $argsvals);
+                if ( $key ){
+                    $argsValues[$args[$i]["name"]] = $argsvals[$key + 1];
+                }
+                else{
+                    $argsValues[$args[$i]["name"]] = "";
+                }
+            }
+
+        }
+
+        //print_r($argsValues);
         return $argsValues;
     }
 

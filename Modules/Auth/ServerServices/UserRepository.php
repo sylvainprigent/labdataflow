@@ -14,6 +14,16 @@ class UserRepository extends \Mumux\Server\Repository
         return null;
     }
 
+    public function getByLogin($login){
+
+        $sql = "SELECT id, name, firstname, status_id FROM auth_users WHERE login=?";
+        $req = $this->runRequest($sql, array($login));
+        if ($req->rowCount() > 0){
+            return $req->fetch();
+        }
+        return null;
+    }
+
     public function createDefaultUser(){
 
 

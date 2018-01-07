@@ -227,10 +227,10 @@ class Cache
          * @param type $path
          * @return type
          */
-        public function getURLInfos($requestType, $path, $argsNum)
+        public function getURLInfos($requestType, $path)
         {
-                $sql = "SELECT * FROM cache_api_urls WHERE path=? AND request=? AND argsnum=?";
-                $urlInfo = $this->runRequest($sql, array($path, $requestType, $argsNum))->fetch();
+                $sql = "SELECT * FROM cache_api_urls WHERE path=? AND request=?";
+                $urlInfo = $this->runRequest($sql, array($path, $requestType))->fetch();
 
                 $sqlg = "SELECT * FROM cache_api_urls_gets WHERE url_id=?";
                 $urlInfo["gets"] = $this->runRequest($sqlg, array($urlInfo["id"]))->fetchAll();

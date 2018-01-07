@@ -1,34 +1,48 @@
-<div class="row col-12 align-items-center justify-content-center">
-    <div class="btn-group">
-        <button id="member-list-all-button" class="btn btn-secondary">i18n.member.All</button>
-        <button id="member-list-a-button" class="btn btn-secondary">A</button>
-        <button id="member-list-b-button" class="btn btn-secondary">B</button>
-        <button id="member-list-c-button" class="btn btn-secondary">C</button>
-        <button id="member-list-d-button" class="btn btn-secondary">D</button>
-        <button id="member-list-e-button" class="btn btn-secondary">E</button>
-        <button id="member-list-f-button" class="btn btn-secondary">F</button>
-        <button id="member-list-g-button" class="btn btn-secondary">G</button>
-        <button id="member-list-h-button" class="btn btn-secondary">H</button>
-        <button id="member-list-i-button" class="btn btn-secondary">I</button>
-        <button id="member-list-j-button" class="btn btn-secondary">J</button>
-        <button id="member-list-k-button" class="btn btn-secondary">K</button>
-        <button id="member-list-l-button" class="btn btn-secondary">L</button>
-        <button id="member-list-m-button" class="btn btn-secondary">M</button>
-        <button id="member-list-n-button" class="btn btn-secondary">N</button>
-        <button id="member-list-o-button" class="btn btn-secondary">O</button>
-        <button id="member-list-p-button" class="btn btn-secondary">P</button>
-        <button id="member-list-q-button" class="btn btn-secondary">Q</button>
-        <button id="member-list-r-button" class="btn btn-secondary">R</button>
-        <button id="member-list-s-button" class="btn btn-secondary">S</button>
-        <button id="member-list-t-button" class="btn btn-secondary">T</button>
-        <button id="member-list-u-button" class="btn btn-secondary">U</button>
-        <button id="member-list-v-button" class="btn btn-secondary">V</button>
-        <button id="member-list-w-button" class="btn btn-secondary">W</button>
-        <button id="member-list-x-button" class="btn btn-secondary">X</button>
-        <button id="member-list-y-button" class="btn btn-secondary">Y</button>
-        <button id="member-list-z-button" class="btn btn-secondary">Z</button>
+<div class="container">
+    <div class="row col-12 align-items-center justify-content-center">
+        <div class="btn-group">
+            <button id="member-list-all-button" data-letter="all" class="mumber-list-letter-button btn btn-secondary">i18n.member.All</button>
+            <button id="member-list-a-button" data-letter="a" class="mumber-list-letter-button btn btn-secondary">A</button>
+            <button id="member-list-b-button" data-letter="b" class="mumber-list-letter-button btn btn-secondary">B</button>
+            <button id="member-list-c-button" data-letter="c" class="mumber-list-letter-button btn btn-secondary">C</button>
+            <button id="member-list-d-button" data-letter="d" class="mumber-list-letter-button btn btn-secondary">D</button>
+            <button id="member-list-e-button" data-letter="e" class="mumber-list-letter-button btn btn-secondary">E</button>
+            <button id="member-list-f-button" data-letter="f" class="mumber-list-letter-button btn btn-secondary">F</button>
+            <button id="member-list-g-button" data-letter="g" class="mumber-list-letter-button btn btn-secondary">G</button>
+            <button id="member-list-h-button" data-letter="h" class="mumber-list-letter-button btn btn-secondary">H</button>
+            <button id="member-list-i-button" data-letter="i" class="mumber-list-letter-button btn btn-secondary">I</button>
+            <button id="member-list-j-button" data-letter="j" class="mumber-list-letter-button btn btn-secondary">J</button>
+            <button id="member-list-k-button" data-letter="k" class="mumber-list-letter-button btn btn-secondary">K</button>
+            <button id="member-list-l-button" data-letter="l" class="mumber-list-letter-button btn btn-secondary">L</button>
+            <button id="member-list-m-button" data-letter="m" class="mumber-list-letter-button btn btn-secondary">M</button>
+            <button id="member-list-n-button" data-letter="n" class="mumber-list-letter-button btn btn-secondary">N</button>
+            <button id="member-list-o-button" data-letter="o" class="mumber-list-letter-button btn btn-secondary">O</button>
+            <button id="member-list-p-button" data-letter="p" class="mumber-list-letter-button btn btn-secondary">P</button>
+            <button id="member-list-q-button" data-letter="q" class="mumber-list-letter-button btn btn-secondary">Q</button>
+            <button id="member-list-r-button" data-letter="r" class="mumber-list-letter-button btn btn-secondary">R</button>
+            <button id="member-list-s-button" data-letter="s" class="mumber-list-letter-button btn btn-secondary">S</button>
+            <button id="member-list-t-button" data-letter="t" class="mumber-list-letter-button btn btn-secondary">T</button>
+            <button id="member-list-u-button" data-letter="u" class="mumber-list-letter-button btn btn-secondary">U</button>
+            <button id="member-list-v-button" data-letter="v" class="mumber-list-letter-button btn btn-secondary">V</button>
+            <button id="member-list-w-button" data-letter="w" class="mumber-list-letter-button btn btn-secondary">W</button>
+            <button id="member-list-x-button" data-letter="x" class="mumber-list-letter-button btn btn-secondary">X</button>
+            <button id="member-list-y-button" data-letter="y" class="mumber-list-letter-button btn btn-secondary">Y</button>
+            <button id="member-list-z-button" data-letter="z" class="mumber-list-letter-button btn btn-secondary">Z</button>
+        </div>
     </div>
-</div>
-<div id="member-list-display-div" class="row col-12">
+    <div id="member-list-display-div" class="row col-12 lf-member-list">
 
+    </div>
+    <div class="modal fade" id="member-edit-modal-div">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">i18n.member.editmember</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="member-edit-form-div">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

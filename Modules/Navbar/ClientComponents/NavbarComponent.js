@@ -16,7 +16,7 @@ $(document).ready(function () {
         {
             // action
             //alert("got the avatar" + JSON.stringify(result));
-            $("#lf-navbar-avatar").attr('src', result.data.user.avatar)
+            $("#lf-navbar-avatar").attr('src', result.user.avatar)
             
         }
     });

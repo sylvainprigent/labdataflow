@@ -4,7 +4,21 @@
         "request": "GET",
         "path": "members",
         "route": "MemberRoutes",
-        "action": "get"
+        "action": "get",
+        "gets": [
+            {
+                "name": ":id",
+                "regexp": "d+"     
+            },
+            {
+                "name": "filter",
+                "regexp": ""     
+            },
+            {
+                "name": "limit",
+                "regexp": ""     
+            }
+        ]
     },
     {
         "identifier": "ldf_users_post",
@@ -21,19 +35,6 @@
         "action": "delete"
     },
     {
-        "identifier": "ldf_users_getone",
-        "request": "GET",
-        "path": "members",
-        "route": "MemberRoutes",
-        "action": "getone",
-        "gets": [
-            {
-                "name": "id",
-                "regexp": "d+" 
-            }
-        ]
-    },
-    {
         "identifier": "ldf_users_postone",
         "request": "POST",
         "path": "members",
@@ -41,7 +42,7 @@
         "action": "postone",
         "gets": [
             {
-                "name": "id",
+                "name": ":id",
                 "regexp": "d+" 
             }
         ]
@@ -54,7 +55,7 @@
         "action": "putone",
         "gets": [
             {
-                "name": "id",
+                "name": ":id",
                 "regexp": "d+" 
             }
         ]
@@ -67,7 +68,7 @@
         "action": "deleteone",
         "gets": [
             {
-                "name": "id",
+                "name": ":id",
                 "regexp": "d+" 
             }
         ]

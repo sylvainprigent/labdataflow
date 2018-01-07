@@ -21,6 +21,10 @@ class Repository
         $this->model = $model;
     }
 
+    function getLastInsertId(){
+        return MySqlDatabase::getDatabase()->lastInsertId();
+    }
+
     function runRequest($request, $params = null)
     {
         if ($params == null) {

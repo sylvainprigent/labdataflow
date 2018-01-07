@@ -19,6 +19,10 @@ abstract class Route
         return RepositoryFactory::getRepository($name);
     }
 
+    public function getPutData(){
+        return json_decode(file_get_contents('php://input'), true);
+    }
+
     /**
      * Run the action.
      * Call the method with the same name than the action in the curent controller

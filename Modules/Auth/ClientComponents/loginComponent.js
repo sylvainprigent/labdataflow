@@ -13,8 +13,10 @@ $( document ).ready(function() {
             }, 
             function(response){
                 if ( response[0].status == 'success' ){
-                    //alert("token = " + response[0].jwt);
                     window.sessionStorage.accessToken = response[0].jwt;
+                    window.sessionStorage.setItem('username', response[0].user.name);
+                    window.sessionStorage.setItem('userfirstname', response[0].user.firstname);
+                    window.sessionStorage.setItem('userstatus', response[0].user.status_id);
                     window.location.replace(mumuxconfig.clienturl + mumuxconfig.homepage);
                 }
                 else{

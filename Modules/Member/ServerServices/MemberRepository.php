@@ -22,9 +22,35 @@ class MemberRepository extends \Mumux\Server\Repository
         return null;
     }
 
+    public function selectFilter($filter)
+    {
+
+        $sql = "SELECT auth_users.id, auth_users.login, auth_users.status_id, auth_users.source, "
+            . " auth_users.name, auth_users.firstname, auth_users.email, auth_users.date_last_login, "
+            . " auth_users.date_created, auth_users.phone, member_users.avatar, member_users.title, "
+            . " member_users.position, member_users.institution, member_users.location, "
+            . " member_users.summary "
+            . "FROM auth_users "
+            . "INNER JOIN member_users ON auth_users.id = member_users.id ";
+            
+
+        if ($filter != "all") {
+            $sql .= " WHERE auth_users.name LIKE '" . $filter . "%' ";
+        }
+        $sql .= "ORDER BY auth_users.name ASC ";
+
+        //echo $sql;
+        $req = $this->runRequest($sql);
+        if ($req->rowCount() > 0) {
+            return $req->fetchAll();
+        }
+        return null;
+    }
+
     public function getOne($id)
     {
         $sql = "SELECT auth_users.id, auth_users.login, auth_users.status_id, auth_users.source, "
+            . " auth_users.date_end_contract, "
             . " auth_users.name, auth_users.firstname, auth_users.email, auth_users.date_last_login, "
             . " auth_users.date_created, auth_users.phone, member_users.avatar, member_users.title, "
             . " member_users.position, member_users.institution, member_users.location, "
@@ -40,19 +66,15 @@ class MemberRepository extends \Mumux\Server\Repository
         return null;
     }
 
-    public function add($parameters){
+    public function add($parameters)
+    {
 
-        $sqll = "SELECT id FROM auth_users WHERE login=?";
-        $req = $this->runRequest($sql2, $parameters["login"]);
-        if( $req->rowCount() > 0 ){
-            return array( "error" => "login already exists");
-        }
-
+        // insert in auth table
         $sql = "INSERT INTO auth_users (login, pwd, name, firstname, email, "
-             . " status_id, date_created, date_end_contract, phone) VALUES ( ?,?,?,?,?,?,?,?,? )";
+            . " status_id, date_created, date_end_contract, phone) VALUES ( ?,?,?,?,?,?,?,?,? )";
         $this->runRequest($sql, array(
             $parameters["login"],
-            $parameters["pwd"],
+            md5($parameters["password"]),
             $parameters["name"],
             $parameters["firstname"],
             $parameters["email"],
@@ -62,20 +84,50 @@ class MemberRepository extends \Mumux\Server\Repository
             $parameters["phone"]
         ));
 
-        $id = $this->runRequest($sqll, $parameters["login"])->fetch();
-        $id = $id[0];
+        $id = $this->getLastInsertId();
 
-        // todo: add here upload avatar
-
+        // insert in member table
         $sql2 = "INSERT INTO member_users (id, avatar, title, position, institution, location, summary) VALUES (?,?,?,?,?,?,?)";
         $this->runRequest($sql2, array(
             $id,
-            $avaterurl,
-            $parameters["title"],
-            $parameters["position"],
-            $parameters["institution"],
-            $parameters["location"],
-            $parameters["summary"],
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
         ));
+
+    }
+
+    public function put($id, $parameters){
+        
+        // insert in auth table
+        $sql = "UPDATE auth_users SET login=?, name=?, firstname=?, email=?, "
+            . " status_id=?, date_created=?, date_end_contract=?, phone=? WHERE id=?";
+        $this->runRequest($sql, array(
+            $parameters["login"],
+            $parameters["name"],
+            $parameters["firstname"],
+            $parameters["email"],
+            $parameters["status_id"],
+            date("Y-m-d", time()),
+            $parameters["date_end_contract"],
+            $parameters["phone"],
+            $id
+        ));
+    }
+
+
+
+    public function exists($login)
+    {
+
+        $sql = "SELECT id FROM auth_users WHERE login=?";
+        $req = $this->runRequest($sql, array($login));
+        if ($req->rowCount() > 0) {
+            return true;
+        }
+        return false;
     }
 }
