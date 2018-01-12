@@ -1,5 +1,11 @@
 $(document).ready(function () {
 
+    // home
+    $('#lf-navbar-home-a').click(function(e){
+        e.preventDefault;
+        window.location.replace(mumuxconfig.clienturl + "home");
+    });
+
     // logout
     $("#navbar-logout-a").click(function(e){
         e.preventDefault;

@@ -1,0 +1,126 @@
+[
+    {
+        "identifier": "lf_spaces_list",
+        "request": "GET",
+        "path": "spaces",
+        "route": "SpaceRoutes",
+        "action": "getall"
+    },
+    {
+        "identifier": "lf_spaces_get_one",
+        "request": "GET",
+        "path": "spaces/:id",
+        "route": "SpaceRoutes",
+        "action": "getone",
+        "gets": [
+            {
+                "name": ":id",
+                "regex": "d"     
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_add",
+        "request": "POST",
+        "path": "spaces",
+        "route": "SpaceRoutes",
+        "action": "add"
+    },
+    {
+        "identifier": "lf_spaces_tools_list",
+        "request": "GET",
+        "path": "spaces/:id/tools",
+        "route": "ToolsRoutes",
+        "action": "getspace",
+        "gets": [
+            {
+                "name": ":id",
+                "regex": "d"     
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_availabletools",
+        "request": "GET",
+        "path": "availabletools",
+        "route": "ToolsRoutes",
+        "action": "getall"
+    },
+    {
+        "identifier": "lf_spaces_accesses_all",
+        "request": "GET",
+        "path": "spaces/:id_space/accesses",
+        "route": "AccessesRoutes",
+        "action": "getAll",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"     
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_accesses_one",
+        "request": "GET",
+        "path": "spaces/:id_space/accesses/:id_access",
+        "route": "AccessesRoutes",
+        "action": "getOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"     
+            },
+            {
+                "name": ":id_access",
+                "regex": "d"     
+            }
+        ]
+    },
+    {    
+        "identifier": "lf_spaces_accesses_add",
+        "request": "POST",
+        "path": "spaces/:id_space/accesses",
+        "route": "AccessesRoutes",
+        "action": "addOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"     
+            }
+        ]
+    },
+    {    
+        "identifier": "lf_spaces_accesses_update",
+        "request": "PUT",
+        "path": "spaces/:id_space/accesses/:id_access",
+        "route": "AccessesRoutes",
+        "action": "updateOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"     
+            },
+            {
+                "name": ":id_access",
+                "regex": "d"     
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_accesses_delete",
+        "request": "DELETE",
+        "path": "spaces/:id_space/accesses/:id_access",
+        "route": "AccessesRoutes",
+        "action": "deleteOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"     
+            },
+            {
+                "name": ":id_access",
+                "regex": "d"     
+            }
+        ]
+    }
+]

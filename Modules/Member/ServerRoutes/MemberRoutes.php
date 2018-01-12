@@ -10,29 +10,22 @@ class MemberRoutes extends \Modules\Auth\ServerRoutes\AuthRoutes{
         parent::__construct($request);
     }
 
-    // get all
-    public function get($id, $filter, $limit){
-
-        if ($id > 0){
-            $usersArray = $this->getRepository('Member::MemberRepository')->getOne($id);
-            $this->render($usersArray);
-            return;
-        }
-        else{
-            if ( $filter != ""){
-                $usersArray = $this->getRepository('Member::MemberRepository')->selectFilter($filter);
-            }
-            else{
-                $usersArray = $this->getRepository('Member::MemberRepository')->selectAll();
-            }            
-        }
-        $this->render(array( "users" => $usersArray ));
-        
+    public function getall(){
+        $usersArray = $this->getRepository('Member::MemberRepository')->selectAll();
+        $this->render($usersArray);
     }
 
-    // create one
-    public function post(){
+    public function getfilter($filter){
+        $usersArray = $this->getRepository('Member::MemberRepository')->selectFilter($filter);
+        $this->render($usersArray);
+    }
 
+    public function getone($id){
+        $usersArray = $this->getRepository('Member::MemberRepository')->getOne($id);
+        $this->render($usersArray);
+    }
+
+    public function add(){
         if ($this->user['status_id'] > 1){
             $pwd = $this->request->getParameter("password");
             $pwdconfirm = $this->request->getParameter("passwordconfirm");
@@ -52,23 +45,10 @@ class MemberRoutes extends \Modules\Auth\ServerRoutes\AuthRoutes{
         else{
             $this->render(array( "error" => "success", "message" => "permission denied" ), 403);
         }
-        
-    }
-
-    // delete all
-    public function delete(){
-
-    }
-
- 
-
-    // not allowed
-    public function postone($id){
-        $this->render(array( "status" => "error", "message" => "Method Not Allowed" ), 405);
     }
 
     // update one
-    public function putone($id){
+    public function edit($id){
 
         if ($this->user['status_id'] > 1){
             $this->getRepository('Member::MemberRepository')->put($id, $this->getPutData());
@@ -77,10 +57,5 @@ class MemberRoutes extends \Modules\Auth\ServerRoutes\AuthRoutes{
         else{
             $this->render(array( "status" => "error", "message" => "permission denied" ), 403);
         }
-    }
-
-    // delete one
-    public function deleteone($id){
-
     }
 }

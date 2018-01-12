@@ -91,6 +91,7 @@ $(document).ready(function () {
             ],
             successCallback: function (result) {
                 alert(JSON.stringify(result));
+                $('#member-edit-modal-div').modal('hide');
             }
         });
         $('#member-edit-modal-div').modal('show');

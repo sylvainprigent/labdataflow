@@ -11,9 +11,11 @@ class MemberRepository extends \Mumux\Server\Repository
             . " auth_users.name, auth_users.firstname, auth_users.email, auth_users.date_last_login, "
             . " auth_users.date_created, auth_users.phone, member_users.avatar, member_users.title, "
             . " member_users.position, member_users.institution, member_users.location, "
-            . " member_users.summary "
-            . "FROM auth_users "
-            . "INNER JOIN member_users ON auth_users.id = member_users.id";
+            . " member_users.summary, "
+            . " CONCAT_WS(' ',  auth_users.name, auth_users.firstname) AS fullname "
+            . " FROM auth_users "
+            . " INNER JOIN member_users ON auth_users.id = member_users.id "
+            . " ORDER BY auth_users.name ASC";
 
         $req = $this->runRequest($sql);
         if ($req->rowCount() > 0) {

@@ -1,5 +1,7 @@
 {
     "home": "Home",
     "notifications": "Notifications",
-    "shortcuts": "Shortcuts"
+    "shortcuts": "Shortcuts",
+    "logout": "Logout",
+    "profile": "Profile"
 }

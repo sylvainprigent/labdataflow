@@ -1,0 +1,8 @@
+[
+    {
+        "identifier": "lf_mesenger",
+        "path": "messenger",
+        "component": "messenger",
+        "layout": "layout.html"
+    }
+]

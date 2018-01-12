@@ -1,0 +1,27 @@
+[
+    {
+        "identifier": "lf_spaces_list",
+        "path": "spaces",
+        "component": "spaces",
+        "layout": "layout.html"
+    },
+    {
+        "identifier": "lf_space_tiles",
+        "path": "space",
+        "component": "space",
+        "layout": "layout.html"
+    },
+    {
+        "identifier": "lf_space_config",
+        "path": "spaceconfig",
+        "component": "spaceconfig",
+        "layout": "layout.html"
+    },
+    {
+        "identifier": "lf_space_users",
+        "path": "spaceusers",
+        "component": "spaceusers",
+        "layout": "layout.html"
+    }
+    
+]

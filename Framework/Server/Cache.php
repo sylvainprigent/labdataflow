@@ -46,6 +46,7 @@ class Cache
          */
         protected function addRoutsToDatabase($moduleName, $routingFile)
         {
+                //echo "add routes module:" . $moduleName . "<br/>";
                 $routes = json_decode(\file_get_contents($routingFile));
                 foreach ($routes as $rout) {
 
@@ -57,106 +58,34 @@ class Cache
                         $route = $routeArray["route"];
                         $action = $routeArray["action"];
 
+                        $pathRegex = $path;
                         if (isset($routeArray["gets"])) {
-                                $gets = $routeArray["gets"];
-                        } else {
-                                $gets = array();
+                                foreach ($routeArray["gets"] as $get) {
+                                        $pathRegex = \str_replace($get["name"], $get["regex"], $pathRegex);
+                                }
                         }
 
-                        $this->setCacheUrl($identifier, $requestType, $path, $moduleName, $route, $action, $gets);
+                        $this->setCacheUrl($identifier, $requestType, $path, $pathRegex, $moduleName, $route, $action);
                 }
         }
 
-        protected function setCacheUrl($identifier, $requestType, $path, $module, $route, $actions, $gets)
+        protected function setCacheUrl($identifier, $requestType, $path, $pathRegex, $module, $route, $action)
         {
-        
-                // insert the urls
-                $id = $this->setCacheUrlDB($identifier, $requestType, $path, $module, $route, $actions, count($gets));
-        
-                // instert the gets
-                for ($g = 0; $g < count($gets); $g++) {
-                        $this->setCacheUrlGetDB($id, $gets[$g]["name"], $gets[$g]["regexp"]);
-                }
-        }
-
-        /**
-         * Request to add a route to the database
-         * @param type $identifier
-         * @param type $url
-         * @param type $module
-         * @param type $controller
-         * @param type $action
-         * @return type
-         */
-        protected function setCacheUrlDB($identifier, $requestType, $path, $module, $route, $action, $argsnum)
-        {
-                
-                //echo "identifier = " . $identifier . "<br/>";
-                //echo "isApi = " . $isApi . "<br/>";
-
                 $id = $this->getChacheUrlID($identifier);
                 //echo 'id = ' . $id . "<br/>";
                 if ($id > 0) {
                     //echo "update cache_urls begin <br/>";
-                        $sql = "UPDATE cache_api_urls SET identifier=?, request=?, path=?, module=?, route=?, action=?, argsnum=? WHERE id=?";
-                        $this->runRequest($sql, array($identifier, $requestType, $path, $module, $route, $action, $argsnum, $id));
+                        $sql = "UPDATE cache_api_urls SET identifier=?, request=?, path=?, pathregex=?, module=?, route=?, action=? WHERE id=?";
+                        $this->runRequest($sql, array($identifier, $requestType, $path, $pathRegex, $module, $route, $action, $id));
                     //echo "update cache_urls end <br/>";
                 } else {
                     //echo "insert cache_urls begin <br/>";
-                        $sql = "INSERT INTO cache_api_urls (identifier, request, path, module, route, action, argsnum) VALUES(?,?,?,?,?,?,?) ";
-                        $this->runRequest($sql, array($identifier, $requestType, $path, $module, $route, $action, $argsnum));
+                        $sql = "INSERT INTO cache_api_urls (identifier, request, path, pathregex, module, route, action) VALUES (?,?,?,?,?,?,?) ";
+                        $this->runRequest($sql, array($identifier, $requestType, $path, $pathRegex, $module, $route, $action));
                         $id = $this->getDatabase()->lastInsertId();
                     //echo "insert cache_urls end <br/>";
                 }
                 return $id;
-        }
-
-        /**
-         * Request to add a route get parameters to the database
-         * @param type $id_url
-         * @param type $name
-         * @param type $regexp
-         * @return type
-         */
-        protected function setCacheUrlGetDB($id_url, $name, $regexp)
-        {
-        
-                //echo "name = " . $name; echo "<br/>";
-                //echo "regexp = " . $regexp; echo "<br/>";
-                //echo "id_url = " . $id_url; echo "<br/>";
-
-                $id = $this->getChacheUrlGetID($id_url, $name);
-                //echo "id = "; print_r($id); echo "<br/>";
-                if ($id > 0) {
-                    //echo "UPDATE cache_urls_gets begin <br/>";
-                        $sql = "UPDATE cache_api_urls_gets SET `url_id`=?, `name`=?, `regexp`=? WHERE id=?";
-                        $this->runRequest($sql, array($id_url, $name, $regexp, $id));
-                    //echo "UPDATE cache_urls_gets end <br/>";
-                } else {
-                    //echo "INSERT cache_urls_gets begin <br/>";
-                        $sql = "INSERT INTO cache_api_urls_gets (`url_id`, `name`, `regexp`) VALUES(?,?,?) ";
-                        $this->runRequest($sql, array($id_url, $name, $regexp));
-                        $id = $this->getDatabase()->lastInsertId();
-                    //echo "INSERT cache_urls_gets end <br/>";
-                }
-                return $id;
-        }
-
-        /**
-         * get a get parameter cache route id
-         * @param type $id_url
-         * @param type $name
-         * @return boolean
-         */
-        protected function getChacheUrlGetID($id_url, $name)
-        {
-                $sql = "SELECT id FROM cache_api_urls_gets WHERE url_id=? AND name=?";
-                $req = $this->runRequest($sql, array($id_url, $name));
-                if ($req->rowCount() == 1) {
-                        $tmp = $req->fetch();
-                        return $tmp[0];
-                }
-                return false;
         }
 
         /**
@@ -180,15 +109,8 @@ class Cache
          */
         protected function freeTableURL()
         {
-        
-                //if ($this->isTable("cache_urls")){
                 $sql = "TRUNCATE TABLE cache_api_urls";
                 $this->runRequest($sql);
-                //}
-                //if ($this->isTable("cache_urls_gets")){
-                $sqlg = "TRUNCATE TABLE cache_api_urls_gets";
-                $this->runRequest($sqlg);
-                //}
         }
 
         /**
@@ -201,25 +123,14 @@ class Cache
                         `identifier` varchar(255) NOT NULL DEFAULT '',
                         `request` varchar(255) NOT NULL DEFAULT '',
                         `path` varchar(255) NOT NULL DEFAULT '',
+                        `pathregex` varchar(255) NOT NULL DEFAULT '',
                         `module` varchar(255) NOT NULL DEFAULT '',
                         `route` varchar(255) NOT NULL DEFAULT '',
                         `action` varchar(255) NOT NULL DEFAULT '',
-                        `argsnum` int(11) NOT NULL DEFAULT 0,
                 PRIMARY KEY (`id`)
                 );";
 
                 $this->runRequest($sql);
-
-
-                $sqlg = "CREATE TABLE IF NOT EXISTS `cache_api_urls_gets` (
-                        `id` int(11) NOT NULL AUTO_INCREMENT,
-                        `url_id` int(11) NOT NULL,
-                        `name` varchar(255) NOT NULL DEFAULT '',
-                        `regexp` varchar(255) NOT NULL DEFAULT '',	
-                PRIMARY KEY (`id`)
-                );";
-
-                $this->runRequest($sqlg);
         }
 
         /**
@@ -229,12 +140,8 @@ class Cache
          */
         public function getURLInfos($requestType, $path)
         {
-                $sql = "SELECT * FROM cache_api_urls WHERE path=? AND request=?";
+                $sql = "SELECT * FROM cache_api_urls WHERE pathregex=? AND request=?";
                 $urlInfo = $this->runRequest($sql, array($path, $requestType))->fetch();
-
-                $sqlg = "SELECT * FROM cache_api_urls_gets WHERE url_id=?";
-                $urlInfo["gets"] = $this->runRequest($sqlg, array($urlInfo["id"]))->fetchAll();
-
                 return $urlInfo;
         }
 

@@ -36,15 +36,17 @@ class UpdateRouter
         $modules = Configuration::get("Modules");
         foreach ($modules as $module) {
             $ModelPath = "Modules/" . $module . "/ServerServices";
-            $files = scandir($ModelPath);
-            foreach ($files as $file) {
-                if (substr($file, -9) === "Model.php") {
-                    $className = "\\Modules\\" . $module . "\\ServerServices\\" . substr($file, 0, -4);
-                    $model = new $className();
-                    
-                    $repositoryName = "\\Modules\\" . $module . "\\ServerServices\\" . substr($file, 0, -9) . "Repository";
-                    $repository = new $repositoryName($model);
-                    $repository->createTable();
+            if ( \file_exists($ModelPath)  ){
+                $files = scandir($ModelPath);
+                foreach ($files as $file) {
+                    if (substr($file, -9) === "Model.php") {
+                        $className = "\\Modules\\" . $module . "\\ServerServices\\" . substr($file, 0, -4);
+                        $model = new $className();
+                        
+                        $repositoryName = "\\Modules\\" . $module . "\\ServerServices\\" . substr($file, 0, -9) . "Repository";
+                        $repository = new $repositoryName($model);
+                        $repository->createTable();
+                    }
                 }
             }
         }

@@ -1,0 +1,20 @@
+{
+    "open": "Ouvrir",
+    "add": "Ajouter",
+    "users": "Users",
+    "configuration": "Configuration",
+    "availabletools": "Outils disponibles",
+    "name": "Name",
+    "firstname": "Prénom",
+    "description": "Description",
+    "status": "Statut",
+    "adduser": "Ajouter utilisateur",
+    "disabled": "Inactif",
+    "visitor": "Visiteur",
+    "user": "Utilisateur",
+    "manager": "Gestionaire",
+    "admin": "Administrateur",
+    "accesssaved": "L'access a bien été sauvegardé",
+    "accessdeleted": "L'access a bien été supprimé",
+    "accessadded": "L'access a bien été ajouté"
+}

@@ -11,6 +11,7 @@ class router
 
     protected $modelCache;
     protected $useRouterController;
+    protected $path;
 
     public function __construct()
     {
@@ -25,15 +26,17 @@ class router
 
             $urlInfo = $this->getUrlData($request);
 
-            //print_r($urlInfo);
-
-            $controller = $this->createController($urlInfo, $request);
-
+            // get args
             $action = $urlInfo["pathInfo"]["action"];
             $args = $this->getArgs($urlInfo);
 
-            // parse arfs
+            // create controller
+            $controller = $this->createController($urlInfo["pathInfo"]["module"], 
+                $urlInfo["pathInfo"]["route"], 
+                $request
+            );
 
+            // run action
             $this->runAction($controller, $urlInfo, $action, $args);
 
         } catch (\Exception $e) {
@@ -53,26 +56,49 @@ class router
         if ($request->isParameterNotEmpty('path')) {
             $path = $request->getParameter('path');
         }
+        $this->path = $path;
         $path = str_replace(\Mumux\Configuration::get("rootapi"), "", $path);
- 
-        $pathData = explode("/", $path);
-        //echo 'path 0 = ' . $pathData[0] . "<br/>";
+
+        $regexpPath = $this->getUrlRegexpPath($path);
+        //echo 'regexpPath = ' . $regexpPath . "<br/>";
         //echo 'request type = ' . $request->getType() . "<br/>";
-        $pathInfo = $this->modelCache->getURLInfos($request->getType(), $pathData[0]);
-        return array("pathData" => $pathData, "pathInfo" => $pathInfo);
+        $pathInfo = $this->modelCache->getURLInfos($request->getType(), $regexpPath);
+
+        return array("path" => $path, "pathRegex" => $regexpPath, "pathInfo" => $pathInfo);
     }
 
-    /**
-     * 
-     * @param type $urlInfo
-     * @param Request $request
-     * @return type
-     */
-    private function createController($urlInfo, Request $request)
+    protected function getUrlRegexpPath($url)
     {
-        //print_r($urlInfo);
-        return $this->createControllerImp($urlInfo["pathInfo"]["module"], $urlInfo["pathInfo"]["route"], $request);
+
+        $pathData = explode("/", $url);
+        $path = $pathData[0];
+        $regexp = $path;
+
+        if (count($pathData) > 1) {
+            $pos = 1;
+            while ($pos < count($pathData)) {
+                
+                if (is_numeric($pathData[$pos])) {
+                    $regexp .= "/d";
+                    $pos++;
+                } else {
+                    $regexp .= "/" . $pathData[$pos];
+                    if ( isset($pathData[$pos + 1]) ){
+                        if (is_numeric($pathData[$pos + 1])) {
+                            $regexp .= "/d";
+                        } else {
+                            $regexp .= "/w";
+                        }
+                    }
+
+                    $pos += 2;
+                }
+            }
+        }
+        return $regexp;
     }
+
+
 
     /**
      * Instantiate the controller dedicated to the request
@@ -82,11 +108,11 @@ class router
      * @return Instance of a controller
      * @throws Exception If the controller cannot be instanciate
      */
-    private function createControllerImp($moduleName, $controllerName, Request $request)
+    private function createController($moduleName, $controllerName, Request $request)
     {
         $classController = '\\Modules\\' . $moduleName . "\\ServerRoutes\\" . $controllerName;
         $fileController = 'Modules/' . $moduleName . '/ServerRoutes/' . $controllerName . ".php";
-    
+
         if (file_exists($fileController)) {
             $controller = new $classController($request);
             return $controller;
@@ -103,40 +129,15 @@ class router
     private function getArgs($urlInfo)
     {
 
-        $args = $urlInfo["pathInfo"]["gets"];
-        $argsvals = $urlInfo["pathData"];
+        $path = explode( "/", $urlInfo["path"] );
+        $pathRegex = explode( "/", $urlInfo["pathRegex"]);
+
         $argsValues = array();
-
-        if (count($args) == 0){
-            return $argsValues;
-        }
-
-        //echo "argval:" . $argsvals[1] . "<br/>";
-
-        for ($i = 0; $i < count($args); $i++) {
-
-            if ( $args[$i]["name"] == ":id" ){
-                if ( intval($argsvals[1]) > 0 ){
-                    $argsValues["id"] = intval($argsvals[1]);
-                }
-                else{
-                    $argsValues["id"] = 0;
-                }
-            } 
-            else{
-
-                $key = array_search($args[$i]["name"], $argsvals);
-                if ( $key ){
-                    $argsValues[$args[$i]["name"]] = $argsvals[$key + 1];
-                }
-                else{
-                    $argsValues[$args[$i]["name"]] = "";
-                }
+        for( $i = 0 ; $i < count($path) ; $i++){
+            if ( $pathRegex[$i] == "d" || $pathRegex[$i] == "w" ){
+                $argsValues[] = $path[$i];
             }
-
         }
-
-        //print_r($argsValues);
         return $argsValues;
     }
 
@@ -167,6 +168,7 @@ class router
 
         $data = array(
             'type' => $type,
+            'path' => $this->path,
             'message' => $exception->getMessage()
         );
         header('Content-Type: application/json');

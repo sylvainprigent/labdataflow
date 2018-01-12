@@ -37,7 +37,7 @@ abstract class Route
             call_user_func_array(array($this, $action), $args);
         } else {
             $classController = get_class($this);
-            throw new Exception("Action '$action' in not defined in the class '$classController'");
+            throw new \Exception("Action '$action' in not defined in the class '$classController'");
         }
     }
 

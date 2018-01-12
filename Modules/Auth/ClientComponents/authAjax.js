@@ -25,12 +25,18 @@
             },
             success: function (result)//we got the response
             {
+                //alert( JSON.stringify( result ) );
                 // store the new token or redirect to login
                 if ("jwt" in result) {
                     window.sessionStorage.accessToken = result.jwt;
                 }
                 else {
-                    window.location.replace(mumuxconfig.clienturl + 'login');
+                    if (mumuxconfig.debugmode){
+                        alert("token not found in ajax:" + JSON.stringify(result));
+                    }
+                    else{
+                        window.location.replace(mumuxconfig.clienturl + 'login');
+                    }
                     return;
                 }
 

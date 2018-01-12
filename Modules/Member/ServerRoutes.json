@@ -1,75 +1,54 @@
 [
     {
-        "identifier": "lf_users_get",
+        "identifier": "lf_users_list",
         "request": "GET",
         "path": "members",
         "route": "MemberRoutes",
-        "action": "get",
+        "action": "getall"
+    },
+    {
+        "identifier": "lf_users_list_filter",
+        "request": "GET",
+        "path": "members/filter/:filter",
+        "route": "MemberRoutes",
+        "action": "getfilter",
         "gets": [
             {
-                "name": ":id",
-                "regexp": "d+"     
-            },
-            {
-                "name": "filter",
-                "regexp": ""     
-            },
-            {
-                "name": "limit",
-                "regexp": ""     
+                "name": ":filter",
+                "regex": "w"     
             }
         ]
     },
     {
-        "identifier": "ldf_users_post",
-        "request": "POST",
-        "path": "members",
+        "identifier": "lf_users_getone",
+        "request": "GET",
+        "path": "members/:id",
         "route": "MemberRoutes",
-        "action": "post"
-    },
-    {
-        "identifier": "lf_users_delete",
-        "request": "DELETE",
-        "path": "members",
-        "route": "MemberRoutes",
-        "action": "delete"
-    },
-    {
-        "identifier": "ldf_users_postone",
-        "request": "POST",
-        "path": "members",
-        "route": "MemberRoutes",
-        "action": "postone",
+        "action": "getone",
         "gets": [
             {
                 "name": ":id",
-                "regexp": "d+" 
+                "regex": "d"
             }
         ]
+    },
+    {
+        "identifier": "ldf_users_addone",
+        "request": "POST",
+        "path": "members",
+        "route": "MemberRoutes",
+        "action": "add"
     },
     {
         "identifier": "ldf_users_putone",
         "request": "PUT",
-        "path": "members",
+        "path": "members/:id",
         "route": "MemberRoutes",
-        "action": "putone",
+        "action": "edit",
         "gets": [
             {
                 "name": ":id",
-                "regexp": "d+" 
-            }
-        ]
-    },
-    {
-        "identifier": "ldf_users_deleteone",
-        "request": "DELETE",
-        "path": "members",
-        "route": "MemberRoutes",
-        "action": "deleteone",
-        "gets": [
-            {
-                "name": ":id",
-                "regexp": "d+" 
+                "regex": "d" 
             }
         ]
     }

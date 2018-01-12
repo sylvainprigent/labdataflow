@@ -10,18 +10,26 @@ class I18n
     protected $lang;
     protected $translations;
 
-    public function __construct()
+    public function __construct($language = "")
     {
+
         // get the user language
-        $this->lang = "fr";
-        $supportedLangs = \Mumux\Configuration::get("languages");
-        $clientLanguages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-        foreach ($clientLanguages as $lang) {
-            if (in_array($lang, $supportedLangs)) {
-                $this->lang = $lang;
-                break;
+        if ($language != ""){
+            $this->lang = $language;
+        }
+        else{
+            $this->lang = "en";
+            $supportedLangs = \Mumux\Configuration::get("languages");
+            $clientLanguages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+            foreach ($clientLanguages as $lang) {
+                if (in_array($lang, $supportedLangs)) {
+                    $this->lang = $lang;
+                    break;
+                }
             }
         }
+        
+        
 
 
         // get all the trasnlations
@@ -35,8 +43,22 @@ class I18n
         }
     }
 
-    public function getLang(){
+    public function getLang()
+    {
         return $this->lang;
+    }
+
+    public function tr($identifier)
+    {
+        $identifierArray = explode(".", $identifier);
+        if (count($identifierArray) >= 3) {
+            $module = $identifierArray[1];
+            $char = $identifierArray[2];
+            if (isset($this->translations[$module][$char])) {
+                return $this->translations[$module][$char];
+            }
+        }
+        return $identifier;
     }
 
     public function translate($page)
@@ -69,8 +91,8 @@ class I18n
             while (!$found) {
 
                 $char = substr($page, $pos + 5 + $offset, 1);
-                if ($char == '"' || $char == ' ' || $char == ">" || $char == "<" || $char == "'" || $offset > 255 ) {
-                    $found = true;  
+                if ($char == '"' || $char == ' ' || $char == ">" || $char == "<" || $char == "'" || $offset > 255) {
+                    $found = true;
                 }
                 $offset++;
             }

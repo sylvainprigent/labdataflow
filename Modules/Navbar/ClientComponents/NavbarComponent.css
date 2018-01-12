@@ -25,12 +25,12 @@ body{
     
 }
 
-.lf-tool-link, a:link {
+.lf-tool-link:link {
     color: #9a9da0;
     margin-left: 14px;
 }
 
-.lf-tool-link, a:visited {
+.lf-tool-link:visited {
     color: #9a9da0;
 }
 

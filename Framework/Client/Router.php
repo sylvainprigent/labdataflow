@@ -16,6 +16,12 @@ class router
     {
         $request = new \Mumux\Server\Request($_SERVER['REQUEST_METHOD'], array_merge($_GET, $_POST));
         $urlInfo = $this->getUrlData($request);
+
+        if ( empty($urlInfo) ){
+            echo "404 page not found";
+            return;
+        }
+
         $this->renderModule($urlInfo["module"], $urlInfo["component"], $urlInfo["layout"]);
     }
 
@@ -31,24 +37,32 @@ class router
         if ($request->isParameterNotEmpty('path')) {
             $path = $request->getParameter('path');
         }
+        
+        
         $path = str_replace(\Mumux\Configuration::get("rootapi"), "", $path);
-
+        
+        $pathArray = explode("/", $path);
+        if ( count($pathArray) > 0 ){
+            $path = $pathArray[0];
+        }
         $modelCache = new \Mumux\Client\Cache();
         $pathData = $modelCache->getRouteInfo($path);
+       
 
         return $pathData;
     }
 
-
-
     private function renderModule($moduleName, $componentName, $layoutUrl)
     {
 
+        /*
         if (Configuration::get("usecache")) {
             $this->renderModuleCache($moduleName, $componentName, $layoutUrl);
         } else {
             $this->renderModuleNoCache($moduleName, $componentName, $layoutUrl);
         }
+        */
+        $this->renderModuleCache($moduleName, $componentName, $layoutUrl);
     }
 
     private function renderModuleCache($moduleName, $componentName, $layoutUrl)
@@ -62,12 +76,26 @@ class router
         }
 
         $htmlFile = $cacheDir . "/" . $moduleName . ".html";
-        if (!\file_exists($htmlFile)) {
+        if ( !\file_exists($htmlFile) || !Configuration::get("usecache") ) {
+            $this->rrmdir($cacheDir);
             $this->generateModuleCache($moduleName, $componentName, $layoutUrl, $cacheDir);
         }
         echo \file_get_contents($htmlFile);
 
     }
+
+    private function rrmdir($dir) {
+        if (is_dir($dir)) {
+            $objects = scandir($dir);
+            foreach ($objects as $object) {
+                if ($object != "." && $object != "..") {
+                    if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+                }
+            }
+            reset($objects);
+            rmdir($dir);
+        }
+     } 
 
     private function generateModuleCache($moduleName, $componentName, $layoutUrl, $cacheDir)
     {
@@ -91,8 +119,8 @@ class router
         // get the module base component
         $html = $this->getLayoutContent($layoutUrl);
         $html = $this->insertModuleContent($moduleName, $componentName, $html, false);
-        $head = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . $files["css"] . "\">" . PHP_EOL;;
-        $head .= "<script src=\"" . $files["js"] . "\"></script>";
+        $head = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . \Mumux\Configuration::get("rooturl") . "/" . $files["css"] . "\">" . PHP_EOL;;
+        $head .= "<script src=\"" . \Mumux\Configuration::get("rooturl") . "/" . $files["js"] . "\"></script>";
         $html = \str_replace("<module-scripts></module-scripts>", $head, $html);
         \file_put_contents($files["html"], $html, FILE_APPEND);
 
@@ -112,8 +140,6 @@ class router
             \file_put_contents($files["js"], $tranlsator->translate(\file_get_contents($files["js"])));
         }
 
-
-
     }
 
     private function renderModuleNoCache($moduleName, $componentName, $layoutUrl)
@@ -122,12 +148,12 @@ class router
         $content = $this->insertModuleContent($moduleName, $componentName, $content);
         $content = $this->replaceComponentsContent($content);
 
-        /*
+        
         if (\Mumux\Configuration::get("usei18n")) {
             $tranlsator = new I18n();
             $content = $tranlsator->translate($content);
         }
-         */
+        
         echo $content;
     }
 
@@ -144,7 +170,12 @@ class router
 
         $moduleComponentsDir = "Modules/" . \ucfirst($moduleName) . "/ClientComponents/";
         $jsFile = $moduleComponentsDir . $componentName . "Component.js";
-        return \file_get_contents($jsFile);
+        if (\file_exists($jsFile)){
+            return \file_get_contents($jsFile);
+        }
+        else{
+            return "";
+        }
     }
 
     private function getComponentCss($moduleName, $componentName)
@@ -160,15 +191,19 @@ class router
     private function insertModuleContent($moduleName, $componentName, $content, $replaceHeader = true)
     {
         // get module html content
-        $moduleComponentsDir = "Modules/" . \ucfirst($moduleName) . "/ClientComponents/";
+        $moduleComponentsDir =  "Modules/" . \ucfirst($moduleName) . "/ClientComponents/";
+        //echo "module file=" . $moduleComponentsDir . \ucfirst($componentName) . "Component.html" . "<br/>";
         $moduleContent = \file_get_contents($moduleComponentsDir . \ucfirst($componentName) . "Component.html");
+        //$moduleContent = \str_replace("rooturl", \Mumux\Configuration::get("rooturl"), $moduleContent);
+        
         $content = \str_replace("<module></module>", $moduleContent, $content);
-
+          
         if ($replaceHeader) {
             // get module css and js content
             $head = $this->getComponentHeader($moduleName, $componentName);
             $content = \str_replace("<module-scripts></module-scripts>", $head . "<module-scripts></module-scripts>", $content);
         }
+        
         return $content;
     }
 
@@ -178,6 +213,7 @@ class router
             $html = "<!DOCTYPE html><html><head><module-scripts></module-scripts></head><body><module></module></body></html>";
         } else {
             $html = \file_get_contents($layoutUrl);
+            $html = \str_replace("rooturl", \Mumux\Configuration::get("rooturl"), $html);
         }
         return $html;
     }
@@ -189,12 +225,12 @@ class router
 
         $cssFile = $moduleComponentsDir . $componentName . "Component.css";
         if (\file_exists($cssFile)) {
-            $head .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . $cssFile . "\">";
+            $head .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"" . \Mumux\Configuration::get("rooturl") . "/" . $cssFile . "\">";
         }
 
         $jsFile = $moduleComponentsDir . $componentName . "Component.js";
         if (\file_exists($jsFile)) {
-            $head .= "<script src=\"" . $jsFile . "\"></script>";
+            $head .= "<script src=\"" . \Mumux\Configuration::get("rooturl") . "/" . $jsFile . "\"></script>";
 
         }
 
@@ -284,6 +320,7 @@ class router
         // get component html content
         $moduleComponentsDir = "Modules/" . $moduleName . "/ClientComponents/";
         $moduleContent = \file_get_contents($moduleComponentsDir . $componentName . "Component.html");
+        $moduleContent = \str_replace("rooturl", \Mumux\Configuration::get("rooturl"), $moduleContent);
         $content = \str_replace($tag, $moduleContent, $content);
         
         // get module css and js content
