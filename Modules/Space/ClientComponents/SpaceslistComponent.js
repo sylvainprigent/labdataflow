@@ -18,7 +18,6 @@ $(document).ready(function () {
                 type: "POST",
                 url: mumuxconfig.apiurl + "spaces/"
             },
-            
             title: "",
             data:{
                 origin: "list",

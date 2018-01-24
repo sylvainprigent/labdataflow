@@ -27,7 +27,7 @@
             {
                 //alert( JSON.stringify( result ) );
                 // store the new token or redirect to login
-                if ("jwt" in result) {
+                if (typeof result =='object' && "jwt" in result) {
                     window.sessionStorage.accessToken = result.jwt;
                 }
                 else {

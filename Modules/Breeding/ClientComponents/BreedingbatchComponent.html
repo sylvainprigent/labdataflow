@@ -1,0 +1,84 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-12" id="breeding-batch-edit-main-div">
+
+            <div class="lf-table">
+
+                <h3>i18n.breeding.batch: <i id="breeding-batch-edit-title"></i>
+                </h3>
+
+                <div class="col-12">
+                    <table class="table table-sm" id="breeding-batch-edit-table" >
+                        <tr>
+                            <td>i18n.breeding.quantity</td>
+                            <td><span id="breeding-batch-edit-quantity-td"></span></td>
+                        </tr>
+                        <tr>
+                            <td>i18n.breeding.initialquantity</td>
+                            <td><span id="breeding-batch-edit-initialquantity-td"></span></td>
+                        </tr>
+                        <tr>
+                            <td>i18n.breeding.loss</td>
+                            <td><span id="breeding-batch-edit-loss-td"></span></td>
+                        </tr>
+                        <tr>
+                            <td>i18n.breeding.sales</td>
+                            <td><span id="breeding-batch-edit-sales-td"></span></td>
+                        </tr>
+                        
+                    </table>
+                </div>
+
+                <div class="row h-100 justify-content-center align-items-center">
+                    
+                        <div class="btn-group" role="group" aria-label="Batch buttons">
+
+                            <a class="btn btn-secondary" id="breeding-batch-edit-informations-a" style="height: 50px;">
+                                <i class="fa fa-info-circle"></i>
+                                <p>i18n.breeding.informations</p>
+                            </a>
+                            <a class="btn btn-secondary" id="breeding-batch-edit-moves-a" style="height: 50px;">
+                                <i class="fa fa-location-arrow"></i>
+                                <p>i18n.breeding.moves</p>
+                            </a>
+                            <a class="btn btn-secondary" id="breeding-batch-edit-treatments-a" style="height: 50px;">
+                                <i class="fa fa-medkit"></i>
+                                <p>i18n.breeding.treatments</p>
+                            </a>
+                            <a class="btn btn-secondary" id="breeding-batch-edit-chipping-a" style="height: 50px;">
+                                <i class="fa fa-microchip"></i>
+                                <p>i18n.breeding.chipping</p>
+                            </a>
+                            <a class="btn btn-secondary" id="breeding-batch-edit-sexing-a" style="height: 50px;">
+                                <i class="fa fa-mars"></i>
+                                <i class="fa fa-venus"></i>
+                                <p>i18n.breeding.sexing</p>
+                            </a>
+
+                        </div>
+                    
+                </div>
+            </div>
+            <div class="col-12"></div>
+            <div>
+                <div id="breeding-informations-component-div">
+                    <breedingbatchinformations></breedingbatchinformations>
+                </div>
+                <div id="breeding-moves-component-div">
+                    <breedingbatchmoves></breedingbatchmoves>
+                </div>
+                <div id="breeding-treatments-component-div">
+                    <breedingbatchtreatments></breedingbatchtreatments>
+                </div>
+                <div id="breeding-chipping-component-div">
+                    <breedingbatchchipping></breedingbatchchipping>
+                </div>
+                <div id="breeding-sexing-component-div">
+                    <breedingbatchsexing></breedingbatchsexing>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

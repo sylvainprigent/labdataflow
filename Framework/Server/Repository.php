@@ -103,30 +103,34 @@ class Repository
     public function createTable()
     {
         // create database if not exists
-        $sql = "CREATE TABLE IF NOT EXISTS `" . $this->model->getTableName() . "` (";
-        for ($i = 0; $i < $this->model->getColumnsCount() ; $i++) {
-            $sql .= "`" . $this->model->getColumnName($i) . "` " . $this->model->getColumnType($i);
-            if ($this->model->getColumnDefaultValue($i) != "") {
-                $sql .= " NOT NULL DEFAULT '" . $this->model->getColumnDefaultValue($i) . "' ";
-            }
-            if ($this->model->getColumnName($i) == $this->model->getPrimaryKey()) {
-                $sql .= " AUTO_INCREMENT ";
-            }
 
-            if ($i != $this->model->getColumnsCount() - 1) {
-                $sql .= ", ";
+        if ( $this->model->getTableName() != ""){
+
+            $sql = "CREATE TABLE IF NOT EXISTS `" . $this->model->getTableName() . "` (";
+            for ($i = 0; $i < $this->model->getColumnsCount() ; $i++) {
+                $sql .= "`" . $this->model->getColumnName($i) . "` " . $this->model->getColumnType($i);
+                if ($this->model->getColumnDefaultValue($i) != "") {
+                    $sql .= " NOT NULL DEFAULT '" . $this->model->getColumnDefaultValue($i) . "' ";
+                }
+                if ($this->model->getColumnName($i) == $this->model->getPrimaryKey()) {
+                    $sql .= " AUTO_INCREMENT ";
+                }
+
+                if ($i != $this->model->getColumnsCount() - 1) {
+                    $sql .= ", ";
+                }
             }
-        }
-        if ($this->model->getPrimaryKey() != "") {
-            $sql .= ", PRIMARY KEY (`" . $this->model->getPrimaryKey() . "`)";
-        }
-        $sql .= ");";
+            if ($this->model->getPrimaryKey() != "") {
+                $sql .= ", PRIMARY KEY (`" . $this->model->getPrimaryKey() . "`)";
+            }
+            $sql .= ");";
 
-        $this->runRequest($sql);
+            $this->runRequest($sql);
 
-        // add columns if added later
-        for ($i = 0; $i < $this->model->getColumnsCount() ; $i++) {
-            $this->addColumn($this->model->getTableName($i), $this->model->getColumnName($i), $this->model->getColumnType($i), $this->model->getColumnDefaultValue($i));
+            // add columns if added later
+            for ($i = 0; $i < $this->model->getColumnsCount() ; $i++) {
+                $this->addColumn($this->model->getTableName($i), $this->model->getColumnName($i), $this->model->getColumnType($i), $this->model->getColumnDefaultValue($i));
+            }
         }
     }
 

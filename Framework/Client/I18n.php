@@ -91,7 +91,7 @@ class I18n
             while (!$found) {
 
                 $char = substr($page, $pos + 5 + $offset, 1);
-                if ($char == '"' || $char == ' ' || $char == ">" || $char == "<" || $char == "'" || $offset > 255) {
+                if ($char == '"' || $char == ' ' || $char == ">" || $char == "<" || $char == "'"  || $char == ":" || $char == "," || $offset > 255) {
                     $found = true;
                 }
                 $offset++;

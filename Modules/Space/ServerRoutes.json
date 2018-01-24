@@ -15,7 +15,7 @@
         "gets": [
             {
                 "name": ":id",
-                "regex": "d"     
+                "regex": "d"
             }
         ]
     },
@@ -27,26 +27,6 @@
         "action": "add"
     },
     {
-        "identifier": "lf_spaces_tools_list",
-        "request": "GET",
-        "path": "spaces/:id/tools",
-        "route": "ToolsRoutes",
-        "action": "getspace",
-        "gets": [
-            {
-                "name": ":id",
-                "regex": "d"     
-            }
-        ]
-    },
-    {
-        "identifier": "lf_spaces_availabletools",
-        "request": "GET",
-        "path": "availabletools",
-        "route": "ToolsRoutes",
-        "action": "getall"
-    },
-    {
         "identifier": "lf_spaces_accesses_all",
         "request": "GET",
         "path": "spaces/:id_space/accesses",
@@ -55,7 +35,7 @@
         "gets": [
             {
                 "name": ":id_space",
-                "regex": "d"     
+                "regex": "d"
             }
         ]
     },
@@ -68,15 +48,15 @@
         "gets": [
             {
                 "name": ":id_space",
-                "regex": "d"     
+                "regex": "d"
             },
             {
                 "name": ":id_access",
-                "regex": "d"     
+                "regex": "d"
             }
         ]
     },
-    {    
+    {
         "identifier": "lf_spaces_accesses_add",
         "request": "POST",
         "path": "spaces/:id_space/accesses",
@@ -85,11 +65,11 @@
         "gets": [
             {
                 "name": ":id_space",
-                "regex": "d"     
+                "regex": "d"
             }
         ]
     },
-    {    
+    {
         "identifier": "lf_spaces_accesses_update",
         "request": "PUT",
         "path": "spaces/:id_space/accesses/:id_access",
@@ -98,11 +78,11 @@
         "gets": [
             {
                 "name": ":id_space",
-                "regex": "d"     
+                "regex": "d"
             },
             {
                 "name": ":id_access",
-                "regex": "d"     
+                "regex": "d"
             }
         ]
     },
@@ -115,11 +95,82 @@
         "gets": [
             {
                 "name": ":id_space",
-                "regex": "d"     
+                "regex": "d"
             },
             {
                 "name": ":id_access",
-                "regex": "d"     
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_availabletools",
+        "request": "GET",
+        "path": "availabletools",
+        "route": "ToolsRoutes",
+        "action": "availableTools"
+    },
+    {
+        "identifier": "lf_spaces_tools_all",
+        "request": "GET",
+        "path": "spaces/:id_space/tools",
+        "route": "ToolsRoutes",
+        "action": "getAll",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_tools_one",
+        "request": "GET",
+        "path": "spaces/:id_space/tools/:toolname",
+        "route": "ToolsRoutes",
+        "action": "getOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":toolname",
+                "regex": "w"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_tools_update",
+        "request": "PUT",
+        "path": "spaces/:id_space/tools/:toolname",
+        "route": "ToolsRoutes",
+        "action": "updateOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":toolname",
+                "regex": "w"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_tools_delete",
+        "request": "DELETE",
+        "path": "spaces/:id_space/tools/:toolname",
+        "route": "AccessesRoutes",
+        "action": "deleteOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":toolname",
+                "regex": "w"
             }
         ]
     }

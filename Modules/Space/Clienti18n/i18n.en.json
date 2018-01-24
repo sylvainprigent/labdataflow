@@ -16,5 +16,9 @@
     "admin": "Administrator",
     "accesssaved": "Access has been saved",
     "accessdeleted": "Access has been deleted",
-    "accessadded": "Access has been added"
+    "accessadded": "Access has been added",
+    "tools": "Tools",
+    "editspace": "Edit space",
+    "public": "Public",
+    "private": "Private"
 }

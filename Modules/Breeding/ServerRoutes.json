@@ -1,0 +1,652 @@
+[
+    {
+        "identifier": "lf_breeding_losstypes_all",
+        "request": "GET",
+        "path": "spaces/:id_space/losstypes",
+        "route": "LosstypeRoutes",
+        "action": "getAll",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_losstypes_one",
+        "request": "GET",
+        "path": "spaces/:id_space/losstypes/:id",
+        "route": "LosstypeRoutes",
+        "action": "getOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_losstypes_add",
+        "request": "POST",
+        "path": "spaces/:id_space/losstypes",
+        "route": "LosstypeRoutes",
+        "action": "addOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_losstypes_update",
+        "request": "PUT",
+        "path": "spaces/:id_space/losstypes/:id",
+        "route": "LosstypeRoutes",
+        "action": "updateOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_losstypes_delete",
+        "request": "DELETE",
+        "path": "spaces/:id_space/losstypes/:id",
+        "route": "LosstypeRoutes",
+        "action": "deleteOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+
+    {
+        "identifier": "lf_breeding_categories_all",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingcategories",
+        "route": "CategoryRoutes",
+        "action": "getAll",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_categories_one",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingcategories/:id",
+        "route": "CategoryRoutes",
+        "action": "getOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_categories_add",
+        "request": "POST",
+        "path": "spaces/:id_space/breedingcategories",
+        "route": "CategoryRoutes",
+        "action": "addOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_categories_update",
+        "request": "PUT",
+        "path": "spaces/:id_space/breedingcategories/:id",
+        "route": "CategoryRoutes",
+        "action": "updateOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_categories_delete",
+        "request": "DELETE",
+        "path": "spaces/:id_space/breedingcategories/:id",
+        "route": "CategoryRoutes",
+        "action": "deleteOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+
+    {
+        "identifier": "lf_breeding_products_all",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingproducts",
+        "route": "ProductRoutes",
+        "action": "getAll",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_products_one",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingproducts/:id",
+        "route": "ProductRoutes",
+        "action": "getOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_products_add",
+        "request": "POST",
+        "path": "spaces/:id_space/breedingproducts",
+        "route": "ProductRoutes",
+        "action": "addOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_products_update",
+        "request": "PUT",
+        "path": "spaces/:id_space/breedingproducts/:id",
+        "route": "ProductRoutes",
+        "action": "updateOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_products_delete",
+        "request": "DELETE",
+        "path": "spaces/:id_space/breedingproducts/:id",
+        "route": "ProductRoutes",
+        "action": "deleteOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+
+    {
+        "identifier": "lf_breeding_batches_all",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingbatches",
+        "route": "BatchRoutes",
+        "action": "getAll",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_breeding_batches_opened",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingbatchesopened",
+        "route": "BatchRoutes",
+        "action": "getAllOpened",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_breeding_batches_closed",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingbatchesclosed",
+        "route": "BatchRoutes",
+        "action": "getAllClosed",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_batches_one",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingbatches/:id",
+        "route": "BatchRoutes",
+        "action": "getOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_batches_add",
+        "request": "POST",
+        "path": "spaces/:id_space/breedingbatches",
+        "route": "BatchRoutes",
+        "action": "addOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_batches_update",
+        "request": "PUT",
+        "path": "spaces/:id_space/breedingbatches/:id",
+        "route": "BatchRoutes",
+        "action": "updateOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_batches_delete",
+        "request": "DELETE",
+        "path": "spaces/:id_space/breedingbatches/:id",
+        "route": "BatchRoutes",
+        "action": "deleteOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+
+    {
+        "identifier": "lf_breeding_loss_all",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/losses",
+        "route": "LossRoutes",
+        "action": "getAll",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_loss_one",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/losses/:id",
+        "route": "LossRoutes",
+        "action": "getOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_loss_add",
+        "request": "POST",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/losses",
+        "route": "LossRoutes",
+        "action": "addOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_loss_update",
+        "request": "PUT",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/losses/:id",
+        "route": "LossRoutes",
+        "action": "updateOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_loss_delete",
+        "request": "DELETE",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/losses/:id",
+        "route": "LossRoutes",
+        "action": "deleteOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+
+    {
+        "identifier": "lf_breeding_treatments_all",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/treatments",
+        "route": "TreatmentRoutes",
+        "action": "getAll",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_treatments_one",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/treatments/:id",
+        "route": "TreatmentRoutes",
+        "action": "getOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_treatments_add",
+        "request": "POST",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/treatments",
+        "route": "TreatmentRoutes",
+        "action": "addOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_treatments_update",
+        "request": "PUT",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/treatments/:id",
+        "route": "TreatmentRoutes",
+        "action": "updateOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_treatments_delete",
+        "request": "DELETE",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/treatments/:id",
+        "route": "TreatmentRoutes",
+        "action": "deleteOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+
+
+    {
+        "identifier": "lf_breeding_chipping_all",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/chipping",
+        "route": "ChippingRoutes",
+        "action": "getAll",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_chipping_one",
+        "request": "GET",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/chipping/:id",
+        "route": "ChippingRoutes",
+        "action": "getOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_chipping_add",
+        "request": "POST",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/chipping",
+        "route": "ChippingRoutes",
+        "action": "addOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_chipping_update",
+        "request": "PUT",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/chipping/:id",
+        "route": "ChippingRoutes",
+        "action": "updateOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_chipping_delete",
+        "request": "DELETE",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/chipping/:id",
+        "route": "ChippingRoutes",
+        "action": "deleteOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            },
+            {
+                "name": ":id",
+                "regex": "d"
+            }
+        ]
+    },
+
+    {
+        "identifier": "lf_spaces_sexing",
+        "request": "POST",
+        "path": "spaces/:id_space/breedingbatches/:id_batch/sexing",
+        "route": "SexingRoutes",
+        "action": "sexing",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_batch",
+                "regex": "d"
+            }
+        ]
+    }
+]

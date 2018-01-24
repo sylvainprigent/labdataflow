@@ -48,16 +48,18 @@ class Cache
         {
 
                 $routes = \json_decode(\file_get_contents($routingFile));
-                foreach($routes as $route){
+                if (is_array($routes)) {
+                        foreach ($routes as $route) {
 
-                        $routeArray = json_decode(json_encode($route), true);
+                                $routeArray = json_decode(json_encode($route), true);
 
-                        $identifier = $routeArray["identifier"];
-                        $path = $routeArray["path"];
-                        $component = $routeArray["component"];
-                        $layout = $routeArray["layout"];
+                                $identifier = $routeArray["identifier"];
+                                $path = $routeArray["path"];
+                                $component = $routeArray["component"];
+                                $layout = $routeArray["layout"];
 
-                        $this->setCacheUrl($identifier, $path, $component, $layout, $moduleName);
+                                $this->setCacheUrl($identifier, $path, $component, $layout, $moduleName);
+                        }
                 }
         }
 

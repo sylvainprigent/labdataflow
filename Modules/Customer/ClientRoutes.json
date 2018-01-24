@@ -1,0 +1,14 @@
+[
+    {
+        "identifier": "lf_customer_tool_conf",
+        "path": "customertoolconf",
+        "component": "customertoolconf",
+        "layout": "layout.html"
+    },
+    {
+        "identifier": "ldf_customer",
+        "path": "customer",
+        "component": "customer",
+        "layout": "layout.html"
+    }
+]

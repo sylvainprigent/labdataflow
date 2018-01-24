@@ -1,0 +1,14 @@
+[
+    {
+        "identifier": "lf_breeding_tool_conf",
+        "path": "breedingtoolconf",
+        "component": "breedingtoolconf",
+        "layout": "layout.html"
+    },
+    {
+        "identifier": "ldf_breeding",
+        "path": "breeding",
+        "component": "breeding",
+        "layout": "layout.html"
+    }
+]

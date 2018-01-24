@@ -1,0 +1,5 @@
+{
+    "name": "i18n.customer.customer", 
+    "description": "i18n.customer.tooldescription",
+    "confcomponent": "customertoolconf"
+}

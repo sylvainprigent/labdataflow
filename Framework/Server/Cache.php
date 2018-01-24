@@ -48,24 +48,26 @@ class Cache
         {
                 //echo "add routes module:" . $moduleName . "<br/>";
                 $routes = json_decode(\file_get_contents($routingFile));
-                foreach ($routes as $rout) {
+                if ( is_array($routes)){
+                        foreach ($routes as $rout) {
 
-                        $routeArray = json_decode(json_encode($rout), true);
+                                $routeArray = json_decode(json_encode($rout), true);
 
-                        $identifier = $routeArray["identifier"];
-                        $requestType = $routeArray["request"];
-                        $path = $routeArray["path"];
-                        $route = $routeArray["route"];
-                        $action = $routeArray["action"];
+                                $identifier = $routeArray["identifier"];
+                                $requestType = $routeArray["request"];
+                                $path = $routeArray["path"];
+                                $route = $routeArray["route"];
+                                $action = $routeArray["action"];
 
-                        $pathRegex = $path;
-                        if (isset($routeArray["gets"])) {
-                                foreach ($routeArray["gets"] as $get) {
-                                        $pathRegex = \str_replace($get["name"], $get["regex"], $pathRegex);
+                                $pathRegex = $path;
+                                if (isset($routeArray["gets"])) {
+                                        foreach ($routeArray["gets"] as $get) {
+                                                $pathRegex = \str_replace($get["name"], $get["regex"], $pathRegex);
+                                        }
                                 }
-                        }
 
-                        $this->setCacheUrl($identifier, $requestType, $path, $pathRegex, $moduleName, $route, $action);
+                                $this->setCacheUrl($identifier, $requestType, $path, $pathRegex, $moduleName, $route, $action);
+                        }
                 }
         }
 

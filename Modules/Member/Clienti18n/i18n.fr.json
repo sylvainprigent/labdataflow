@@ -1,3 +1,18 @@
 {
-    "All": "Tous"
+    "all": "Tous",
+    "contacts": "Contacts",
+    "members": "Membres",
+    "add": "Ajouter",
+    "contactadd": "Ajouter contact",
+    "edit": "Editer",
+    "login": "Identifiant",
+    "name": "Nom",
+    "firstname": "Prénom",
+    "email": "Courriel",
+    "phone": "Téléphone",
+    "password": "Mot de passe",
+    "passwordconfirm": "Confirmer mot de passe",
+    "dateendcontract": "Date fin contrat",
+    "status": "Statut",
+    "memberadd": "Ajouter membre"
 }

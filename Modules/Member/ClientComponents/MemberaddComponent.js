@@ -9,7 +9,7 @@ $(document).ready(function () {
             type: "POST",
             url: mumuxconfig.apiurl + "members"
         },
-        title: "i18n.member.addmember",
+        title: "i18n.member.memberadd",
         data:{
                 origin: "list",
                 list: {

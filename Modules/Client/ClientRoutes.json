@@ -1,8 +1,0 @@
-[
-    {
-        "identifier": "lf_client_tool_conf",
-        "path": "clienttoolconf",
-        "component": "clienttoolconf",
-        "layout": "layout.html"
-    }
-]

@@ -11,7 +11,8 @@ $(document).ready(function () {
         data: '',
         success: function (result) {
 
-            data = result.tools;
+            //alert(JSON.stringify(result));
+            data = result;
 
             if (!data) {
                 $('#lf-space-tile-tool-div').html("");
@@ -23,7 +24,7 @@ $(document).ready(function () {
 
                 
                 html += '<div class="col-md-3 text-center">';
-                html += '    <a class="lf-space-tile" style="background-color: '+data[i].color+'" href="'+data[i].name + '/' +id_space + '">';
+                html += '    <a class="lf-space-tile" style="background-color: '+data[i].color+'" href="'+ mumuxconfig.clienturl + data[i].tool + '/' +id_space + '">';
                 html += '        <i class="fa '+data[i].icon +' fa-3x"></i>';
                 html += '        <br/>';
                 html += '        <span>'+data[i].name +'</span>';

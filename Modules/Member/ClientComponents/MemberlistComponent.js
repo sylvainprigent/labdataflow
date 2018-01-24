@@ -100,12 +100,12 @@ $(document).ready(function () {
     function lf_member_list_ajax(buttonId, filter) {
 
         $(this).authAjax({
-            url: mumuxconfig.apiurl + "/members/filter/" + filter,
+            url: mumuxconfig.apiurl + "members/filter/" + filter,
             type: 'GET',
             data: '',
             success: function (result) {
 
-                data = result.users;
+                data = result;
 
                 if (!data) {
                     $('#member-list-display-div').html("");
@@ -140,9 +140,9 @@ $(document).ready(function () {
                     html += '</div>';
 
                     html += '<div class="col-3">';
-                    html += '<button class="btn btn-secondary btn-block">i18n.mamber.addcontact</button>';
+                    html += '<button class="btn btn-secondary btn-block">i18n.member.contactadd</button>';
                     if (window.sessionStorage.getItem('userstatus') > 1) {
-                        html += '<button class="btn btn-primary btn-block lf-member-edit-button" data-id="' + data[i].id + '">i18n.mamber.edit</button>';
+                        html += '<button class="btn btn-primary btn-block lf-member-edit-button" data-id="' + data[i].id + '">i18n.member.edit</button>';
                     }
                     html += '</div>';
 

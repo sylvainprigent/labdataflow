@@ -1,0 +1,279 @@
+[
+    {
+        "identifier": "lf_spaces_pricings_all",
+        "request": "GET",
+        "path": "spaces/:id_space/pricings",
+        "route": "pricingsRoutes",
+        "action": "getAll",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_pricings_one",
+        "request": "GET",
+        "path": "spaces/:id_space/pricings/:id_pricing",
+        "route": "pricingsRoutes",
+        "action": "getOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_pricing",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_pricings_add",
+        "request": "POST",
+        "path": "spaces/:id_space/pricings",
+        "route": "pricingsRoutes",
+        "action": "addOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_pricings_update",
+        "request": "PUT",
+        "path": "spaces/:id_space/pricings/:id_pricing",
+        "route": "pricingsRoutes",
+        "action": "updateOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_pricing",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_pricings_delete",
+        "request": "DELETE",
+        "path": "spaces/:id_space/pricings/:id_pricing",
+        "route": "pricingsRoutes",
+        "action": "deleteOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_pricing",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_company_get",
+        "request": "GET",
+        "path": "spaces/:id_space/companies",
+        "route": "CompaniesRoutes",
+        "action": "get",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_company_update",
+        "request": "PUT",
+        "path": "spaces/:id_space/companies",
+        "route": "CompaniesRoutes",
+        "action": "updateOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_customers_all",
+        "request": "GET",
+        "path": "spaces/:id_space/customers",
+        "route": "customersRoutes",
+        "action": "getAll",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_customers_one",
+        "request": "GET",
+        "path": "spaces/:id_space/customers/:id_customer",
+        "route": "customersRoutes",
+        "action": "getOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_customer",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_customers_add",
+        "request": "POST",
+        "path": "spaces/:id_space/customers",
+        "route": "customersRoutes",
+        "action": "addOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_customers_update",
+        "request": "PUT",
+        "path": "spaces/:id_space/customers/:id_customer",
+        "route": "customersRoutes",
+        "action": "updateOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_customer",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_customers_delete",
+        "request": "DELETE",
+        "path": "spaces/:id_space/customers/:id_customer",
+        "route": "customersRoutes",
+        "action": "deleteOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_customer",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_customers_users_all",
+        "request": "GET",
+        "path": "spaces/:id_space/customers/:id_customer/users",
+        "route": "customersusersRoutes",
+        "action": "getAll",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_customer",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_customers_users_one",
+        "request": "GET",
+        "path": "spaces/:id_space/customers/:id_customer/users/:id_user",
+        "route": "customersusersRoutes",
+        "action": "getOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_customer",
+                "regex": "d"
+            },
+            {
+                "name": ":id_user",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_customers_users_add",
+        "request": "POST",
+        "path": "spaces/:id_space/customers/:id_customer/users",
+        "route": "customersusersRoutes",
+        "action": "addOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_customer",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_customers_user_update",
+        "request": "PUT",
+        "path": "spaces/:id_space/customers/:id_customer/users/:id_user",
+        "route": "customersusersRoutes",
+        "action": "updateOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_customer",
+                "regex": "d"
+            },
+            {
+                "name": ":id_user",
+                "regex": "d"
+            }
+        ]
+    },
+    {
+        "identifier": "lf_spaces_customers_user_delete",
+        "request": "DELETE",
+        "path": "spaces/:id_space/customers/:id_customer/users/:id_user",
+        "route": "customersusersRoutes",
+        "action": "deleteOne",
+        "gets": [
+            {
+                "name": ":id_space",
+                "regex": "d"
+            },
+            {
+                "name": ":id_customer",
+                "regex": "d"
+            },
+            {
+                "name": ":id_user",
+                "regex": "d"
+            }
+        ]
+    }
+]
